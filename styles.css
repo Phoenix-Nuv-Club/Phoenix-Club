@@ -1257,6 +1257,38 @@ textarea.form-control {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-backdrop {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  opacity: 0.16;
+  z-index: 0;
+  overflow: hidden;
+  transition: opacity var(--transition-base);
+}
+
+[data-theme="dark"] .about-backdrop {
+  opacity: 0.13;
+}
+
+.about-bg-logo {
+  width: min(540px, 52vw);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 30px rgba(249, 115, 22, 0.22));
+}
+
+.home-about-copy,
+.home-about-points {
+  position: relative;
+  z-index: 1;
 }
 
 .home-about-copy h2 {
@@ -1281,9 +1313,85 @@ textarea.form-control {
 .about-point {
   padding: 22px 18px;
   border-radius: var(--radius-md);
-  background: var(--bg-subtle);
+  background: rgba(241, 245, 249, 0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border: 1px solid var(--border-subtle);
   transition: all var(--transition-base);
+}
+
+[data-theme="dark"] .about-point {
+  background: rgba(30, 41, 59, 0.65);
+}
+
+/* ==========================================================================
+   Fixed Watermark Logo for About Page (Visible throughout when scrolling)
+   ========================================================================== */
+.about-page-fixed-backdrop {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(650px, 62vw);
+  max-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.16;
+  user-select: none;
+  transition: opacity var(--transition-base);
+}
+
+[data-theme="dark"] .about-page-fixed-backdrop {
+  opacity: 0.13;
+}
+
+.about-page-bg-logo {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 35px rgba(249, 115, 22, 0.22));
+}
+
+.about-page-container {
+  position: relative;
+  z-index: 1;
+}
+
+.about-page-container .page-hero,
+.about-page-container section {
+  position: relative;
+  z-index: 1;
+}
+
+.about-page-container .page-hero-inner {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+[data-theme="dark"] .about-page-container .page-hero-inner {
+  background: rgba(17, 26, 46, 0.85);
+}
+
+.about-page-container .mission-card,
+.about-page-container .value-card,
+.about-page-container .timeline-card,
+.about-page-container .info-item-box {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+[data-theme="dark"] .about-page-container .mission-card,
+[data-theme="dark"] .about-page-container .value-card,
+[data-theme="dark"] .about-page-container .timeline-card,
+[data-theme="dark"] .about-page-container .info-item-box {
+  background: rgba(30, 41, 59, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .about-point:hover {
