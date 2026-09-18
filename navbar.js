@@ -139,23 +139,56 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Active Link Highlighting based on current file
-  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-  const allNavLinks = document.querySelectorAll('.navbar-links a:not(.dropdown-toggle)');
-  allNavLinks.forEach(function (link) {
-    const href = link.getAttribute('href');
-    if (href && (href === currentPath || (currentPath === '' && href === 'index.html'))) {
-      link.classList.add('current');
-      // If inside dropdown, also highlight dropdown parent
-      const parentDropdown = link.closest('.dropdown');
+  // Active Link Highlighting based on current file and anchor hash
+  function updateActiveNavLink() {
+    const rawPath = window.location.pathname.split('/').pop().toLowerCase();
+    const currentPath = rawPath || 'index.html';
+    const currentHash = window.location.hash.toLowerCase();
+    const allLinks = Array.from(document.querySelectorAll('.navbar-links a:not(.dropdown-toggle)'));
+    const allToggles = document.querySelectorAll('.navbar-links .dropdown-toggle');
+
+    // Reset all previous current markers
+    allLinks.forEach(function (link) {
+      link.classList.remove('current');
+    });
+    allToggles.forEach(function (toggle) {
+      toggle.classList.remove('current');
+    });
+
+    let bestMatch = null;
+
+    // 1. Check for specific hash match first if hash is present
+    if (currentHash) {
+      bestMatch = allLinks.find(function (link) {
+        const href = (link.getAttribute('href') || '').toLowerCase();
+        return href === (currentPath + currentHash) || href === currentHash;
+      });
+    }
+
+    // 2. Fallback to base page match
+    if (!bestMatch) {
+      bestMatch = allLinks.find(function (link) {
+        const href = (link.getAttribute('href') || '').toLowerCase().split('#')[0].split('?')[0];
+        return href === currentPath || (currentPath === 'index.html' && (href === '' || href === 'index.html'));
+      });
+    }
+
+    // Highlight matched link and its parent dropdown
+    if (bestMatch) {
+      bestMatch.classList.add('current');
+      const parentDropdown = bestMatch.closest('.dropdown');
       if (parentDropdown) {
         const toggle = parentDropdown.querySelector('.dropdown-toggle');
         if (toggle) toggle.classList.add('current');
       }
     }
-  });
+  }
+
+  updateActiveNavLink();
+  window.addEventListener('hashchange', updateActiveNavLink);
 
   // Close mobile drawer when clicking any nav link
+  const allNavLinks = document.querySelectorAll('.navbar-links a:not(.dropdown-toggle)');
   allNavLinks.forEach(function (link) {
     link.addEventListener('click', function () {
       if (window.innerWidth <= BREAKPOINT) {

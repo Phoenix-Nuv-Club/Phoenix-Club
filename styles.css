@@ -461,9 +461,11 @@ p {
 }
 
 .dropdown-menu li a:hover,
-.dropdown-menu li a:focus-visible {
+.dropdown-menu li a:focus-visible,
+.dropdown-menu li a.current {
   color: var(--accent-text-strong);
   background: rgba(234, 88, 12, 0.08);
+  font-weight: 700;
 }
 
 /* Registration Tag in Navbar.
