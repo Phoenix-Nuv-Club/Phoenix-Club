@@ -61,20 +61,65 @@
       margin-top: 24px;
     }
     .info-item-box {
-      padding: 16px;
+      padding: 18px;
       border-radius: var(--radius-md);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-subtle);
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                  box-shadow 0.32s ease, 
+                  border-color 0.25s ease, 
+                  background 0.25s ease;
+      will-change: transform, box-shadow;
+    }
+    .info-item-box:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: var(--flame-500);
+      background: var(--bg-surface);
+      box-shadow: 0 16px 32px -6px rgba(234, 88, 12, 0.22), 
+                  0 6px 16px -3px rgba(0, 0, 0, 0.08), 
+                  0 0 0 1px var(--flame-500);
+      z-index: 2;
     }
     .info-item-box strong {
       display: block;
       color: var(--accent-text);
       font-size: var(--text-md);
+      font-weight: 800;
       margin-bottom: 4px;
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
+    .info-item-box:hover strong {
+      color: var(--flame-600);
+      transform: translateX(3px);
     }
     .info-item-box span {
       font-size: var(--text-base);
       color: var(--ink-600);
       line-height: 1.5;
       display: block;
+      transition: color 0.25s ease;
+    }
+    .info-item-box:hover span {
+      color: var(--ink-900);
+    }
+    [data-theme="dark"] .info-item-box {
+      background: rgba(30, 41, 59, 0.5);
+      border-color: var(--border-subtle);
+    }
+    [data-theme="dark"] .info-item-box:hover {
+      background: var(--bg-surface);
+      border-color: var(--flame-400);
+      box-shadow: 0 18px 36px -6px rgba(249, 115, 22, 0.32), 
+                  0 8px 18px rgba(0, 0, 0, 0.45), 
+                  0 0 0 1.5px var(--flame-400);
+    }
+    [data-theme="dark"] .info-item-box:hover strong {
+      color: var(--flame-400);
+    }
+    [data-theme="dark"] .info-item-box:hover span {
+      color: #f1f5f9;
     }
     .mission-grid {
       display: grid;
