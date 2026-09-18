@@ -2408,7 +2408,8 @@ textarea.form-control {
   outline-offset: 2px;
 }
 
-.year-section {
+.year-section,
+#highlights {
   scroll-margin-top: 100px;
 }
 

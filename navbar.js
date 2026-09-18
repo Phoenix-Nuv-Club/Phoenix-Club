@@ -187,6 +187,35 @@ document.addEventListener('DOMContentLoaded', function () {
   updateActiveNavLink();
   window.addEventListener('hashchange', updateActiveNavLink);
 
+  // Smooth scroll and focus for in-page anchors such as #highlights
+  document.querySelectorAll('a[href*="#highlights"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      const currentPath = window.location.pathname.split('/').pop().toLowerCase() || 'index.html';
+      const rawTarget = link.getAttribute('href') || '';
+      const targetPath = rawTarget.split('#')[0].toLowerCase();
+      if (!targetPath || targetPath === currentPath) {
+        const target = document.getElementById('highlights');
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (history.pushState) {
+            history.pushState(null, null, '#highlights');
+          } else {
+            window.location.hash = '#highlights';
+          }
+          updateActiveNavLink();
+        }
+      }
+    });
+  });
+
+  if (window.location.hash === '#highlights') {
+    setTimeout(function () {
+      const target = document.getElementById('highlights');
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 120);
+  }
+
   // Close mobile drawer when clicking any nav link
   const allNavLinks = document.querySelectorAll('.navbar-links a:not(.dropdown-toggle)');
   allNavLinks.forEach(function (link) {
