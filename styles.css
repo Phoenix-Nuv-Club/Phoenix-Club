@@ -2159,34 +2159,56 @@ textarea.form-control {
   font-weight: 800;
 }
 
-.footer-links li.footer-social-first {
-  margin-top: 4px;
+/* Sleek Social Icon Buttons in Footer */
+.footer-social-icons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
 }
 
-/* Social Pills in Footer */
-.footer-social-pill {
+.footer-social-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 7px 14px;
-  border-radius: var(--radius-full);
-  font-size: var(--text-base);
-  font-weight: 600;
-  text-decoration: none;
-  white-space: nowrap;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   background: #1e293b;
-  border: 1px solid #334155;
-  color: #cbd5e1;
-  transition: all var(--transition-fast);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
 }
 
-.footer-social-pill:hover {
-  background: var(--flame-600);
-  border-color: var(--flame-600);
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.3);
+.footer-social-btn svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.footer-social-btn:hover {
+  color: #ffffff;
+  transform: translateY(-3px) scale(1.08);
+}
+
+.footer-social-btn.instagram:hover {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(214, 36, 159, 0.5);
+}
+
+.footer-social-btn.email:hover {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
+}
+
+.footer-social-btn:hover svg {
+  transform: scale(1.15);
+}
+
 
 .footer-admin-link {
   display: inline-flex;
