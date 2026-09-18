@@ -1654,6 +1654,8 @@ textarea.form-control {
 }
 
 .page-hero-inner {
+  position: relative;
+  overflow: hidden;
   display: grid;
   grid-template-columns: 1.25fr 0.75fr;
   align-items: center;
@@ -1663,6 +1665,37 @@ textarea.form-control {
   background: linear-gradient(135deg, var(--bg-surface) 0%, var(--flame-50) 100%);
   border: 1px solid rgba(249, 115, 22, 0.18);
   box-shadow: var(--shadow-md);
+}
+
+.about-hero-backdrop {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  opacity: 0.14;
+  z-index: 0;
+  transition: opacity var(--transition-base);
+}
+
+[data-theme="dark"] .about-hero-backdrop {
+  opacity: 0.12;
+}
+
+.about-hero-bg-logo {
+  width: min(520px, 55vw);
+  max-height: 120%;
+  height: auto;
+  object-fit: contain;
+  user-select: none;
+  filter: drop-shadow(0 8px 24px rgba(249, 115, 22, 0.18));
+}
+
+.page-hero-copy,
+.page-hero-visual {
+  position: relative;
+  z-index: 1;
 }
 
 .page-hero-copy h1 {
