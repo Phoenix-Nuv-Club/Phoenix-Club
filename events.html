@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="phoenix-club-logo.png" />
+  <link rel="apple-touch-icon" href="phoenix-club-logo.png" />
+  <title>All Events &amp; Initiatives — Phoenix Club | Navrachana University</title>
+  <meta name="description" content="Explore all flagship events, festivals, field visits, guest lectures, and academic initiatives organized by Phoenix Club at Navrachana University." />
+
+  <!-- Google Fonts: Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ==========================================================================
+       Navigation Bar
+       ========================================================================== -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="navbar-brand">
+      <a href="index.html" class="brand-link" aria-label="Phoenix Club home">
+        <div class="brand-logo-wrap">
+          <img src="phoenix-club-logo.png" alt="Phoenix Club emblem" class="logo-left" />
+        </div>
+        <div class="brand-info">
+          <span class="brand-title">Phoenix Club <span class="brand-title-tag">NUV</span></span>
+          <span class="brand-subtitle">Science | Innovation | Leadership</span>
+        </div>
+      </a>
+    </div>
+
+    <ul class="navbar-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+          Team <span class="arrow" aria-hidden="true">&#9662;</span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="core-team.html#core-heads-title">Core Team</a></li>
+          <li><a href="committee.html#committee-title">Committee</a></li>
+          <li><a href="past-members.html">Past Members</a></li>
+        </ul>
+      </li>
+
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle current" aria-haspopup="true" aria-expanded="false">
+          Events <span class="arrow" aria-hidden="true">&#9662;</span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="events.html" class="current">All Events</a></li>
+          <li><a href="upcoming-events.html">Upcoming Events</a></li>
+        </ul>
+      </li>
+
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+          Gallery <span class="arrow" aria-hidden="true">&#9662;</span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="past-events.html">Event Gallery</a></li>
+          <li><a href="past-events.html#highlights">Annual Highlights</a></li>
+        </ul>
+      </li>
+
+      <li><a href="sponsorships.html">Sponsorships</a></li>
+      <li><a href="registration.html" class="nav-registration-tag">Registration</a></li>
+      <li class="cta"><a href="contact.html">Contact Us</a></li>
+    </ul>
+
+    <div class="navbar-right">
+      <div class="nuv-logo-wrap">
+        <img src="navrachana-university-logo.png" alt="Navrachana University logo" class="logo-right" />
+      </div>
+      <button type="button" class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle light and dark theme" title="Switch to Dark Mode">
+        <span class="theme-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        <span class="theme-label">Dark</span>
+      </button>
+      <button type="button" class="navbar-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+       Page Hero
+       ========================================================================== -->
+  <main id="main" class="container team-page">
+    <section class="page-hero">
+      <div class="page-hero-inner reveal">
+        <div class="page-hero-copy">
+          <span class="section-tag">Campus Life &amp; Initiatives</span>
+          <h1>All Events &amp; Experiences</h1>
+          <p>
+            From formal leadership investitures and biodiversity awareness drives to hands-on microbiology laboratories, grand annual festivals, field treks, and distinguished guest keynotes — explore the full spectrum of Phoenix Club events.
+          </p>
+        </div>
+
+        <div class="page-hero-visual">
+          <div class="logo-panel">
+            <img src="phoenix-club-logo.png" alt="Phoenix Club official emblem" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Event Category Filter Tabs -->
+    <div class="filter-tabs-bar visible" role="tablist" aria-label="Filter all events by category" id="eventFilterBar">
+      <button type="button" class="filter-pill active" data-category="all">All Events (7)</button>
+      <button type="button" class="filter-pill" data-category="flagship">Flagship &amp; Ceremonies</button>
+      <button type="button" class="filter-pill" data-category="academic">Academic &amp; Lectures</button>
+      <button type="button" class="filter-pill" data-category="experiential">Field &amp; Hands-On</button>
+    </div>
+
+    <!-- ==========================================================================
+         All Events Showcase Grid
+         ========================================================================== -->
+    <section class="team-section" aria-labelledby="all-events-heading">
+      <div class="section-heading reveal">
+        <span class="section-tag">Club Calendar &amp; Heritage</span>
+        <h2 id="all-events-heading">Signature Phoenix Club Events</h2>
+        <p>Click on any event card to explore upcoming schedules, RSVP for sessions, or view photo galleries.</p>
+      </div>
+
+      <div class="team-grid">
+        <!-- 1. Investiture Ceremony -->
+        <article class="team-card reveal" data-category="flagship" id="event-investiture">
+          <div class="event-photo">
+            <img src="images/events/investiture-ceremony.jpg" alt="Investiture Ceremony" class="lightbox-trigger" />
+            <span class="card-role-chip chip-accent">Annual Induction</span>
+          </div>
+          <div class="member-copy">
+            <span class="role-badge">Ceremony | Leadership</span>
+            <h3>Investiture Ceremony</h3>
+            <p>The official ceremonial induction of the Phoenix Club Core Council and committee heads, featuring oath-taking, badge pinning, and leadership address.</p>
+            <div class="card-foot">
+              <span class="meta-chip">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                NUV Main Auditorium
+              </span>
+              <a href="upcoming-events.html#event-investiture" class="btn btn-primary btn-sm">Upcoming Schedule</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Wildlife Week Celebration -->
+        <article class="team-card reveal" data-category="experiential" id="event-wildlife">
+          <div class="event-photo">
+            <img src="images/events/wildlife-week.jpg" alt="Wildlife Week Celebration" class="lightbox-trigger" />
+            <span class="card-role-chip chip-accent">Ecology &amp; Nature</span>
+          </div>
+          <div class="member-copy">
+            <span class="role-badge">Environment | Life Sciences</span>
+            <h3>Wildlife Week Celebration</h3>
+            <p>An interactive week-long awareness drive featuring campus biodiversity photo exhibitions, wildlife trivia, conservation documentary screenings, and nature treks.</p>
+            <div class="card-foot">
+              <span class="meta-chip">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Central Courtyard
+              </span>
+              <a href="upcoming-events.html#event-wildlife" class="btn btn-primary btn-sm">Upcoming Schedule</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. Teacher's Day Celebration -->
+        <article class="team-card reveal" data-category="flagship" id="event-teachers-day">
+          <div class="event-photo">
+            <img src="images/events/teachers-day.jpg" alt="Teacher's Day Celebration" class="lightbox-trigger" />
+            <span class="card-role-chip">Faculty Honor</span>
+          </div>
+          <div class="member-copy">
+            <span class="role-badge">Community | Gratitude</span>
+            <h3>Teacher's Day Celebration</h3>
+            <p>Honoring our mentors, faculty advisors, and departmental professors with personalized student tributes, cultural presentations, fun activities, and felicitation gifts.</p>
+            <div class="card-foot">
+              <span class="meta-chip">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Multi-Purpose Hall
+              </span>
+              <a href="past-events.html" class="btn btn-secondary btn-sm">View Highlights</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. Annual Day -->
+        <article class="team-card reveal" data-category="flagship" id="event-annual-day">
+          <div class="event-photo">
+            <img src="images/events/annual-day.jpg" alt="Annual Day Celebration" class="lightbox-trigger" />
+            <span class="card-role-chip chip-accent">Grand Summit</span>
+          </div>
+          <div class="member-copy">
+            <span class="role-badge">Campus Festival | Flagship</span>
+            <h3>Annual Day Celebration</h3>
+            <p>The premier annual summit celebrating student achievements, student-led innovation showcases, volunteer appreciation, and the prestigious Phoenix Club Excellence Awards.</p>
+            <div class="card-foot">
+              <span class="meta-chip">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                University Grounds
+              </span>
+              <a href="upcoming-events.html#event-annual-day" class="btn btn-primary btn-sm">Upcoming Schedule</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5. Field Visits -->
+        <article class="team-card reveal" data-category="experiential" id="event-field-visits">
+          <div class="event-photo">
+            <img src="images/events/field-visit.jpg" alt="Field Visits" class="lightbox-trigger" />
+            <span class="card-role-chip">Experiential Trek</span>
+          </div>
+          <div class="member-copy">
+            <span class="role-badge">Industry &amp; Nature Trek</span>
+            <h3>Field Visits</h3>
+            <p>Organized educational journeys taking students beyond classroom walls to explore biotechnology parks, industrial fermentation units, botanical gardens, and wildlife reserves.</p>
+            <div class="card-foot">
+              <span class="meta-chip">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Regional Bio Hubs
+              </span>
+              <a href="registration.html" class="btn btn-secondary btn-sm">Inquire &amp; Join</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6. Microbiology Day -->
+        <article class="team-card reveal" data-category="academic" id="event-microbiology-day">
+          <div class="event-photo">
+            <img src="images/events/microbiology-day.jpg" alt="Microbiology Day Celebration" class="lightbox-trigger" />
+            <span class="card-role-chip chip-accent">Lab Special</span>
+          </div>
+          <div class="member-copy">
+            <span class="role-badge">Bioscience | Laboratory</span>
+            <h3>Microbiology Day Celebration</h3>
+            <p>A hands-on bioscience festival featuring live microscopic organism viewing, microbial agar plate art contests, culture demonstrations, and scientific trivia quizzes.</p>
+            <div class="card-foot">
+              <span class="meta-chip">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Life Sciences Lab
+              </span>
+              <a href="registration.html" class="btn btn-primary btn-sm">Register / RSVP</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- 7. Specific Guest Lectures Section -->
+      <div class="team-group reveal section-gap" id="guest-lectures">
+        <div class="team-group-header">
+          <div class="group-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+          </div>
+          <div>
+            <h3>Distinguished Guest Lectures Series</h3>
+            <p class="text-muted">Exclusive keynote addresses and interactive Q&amp;A sessions with visiting scientists and industry leaders.</p>
+          </div>
+        </div>
+
+        <div class="team-grid">
+          <!-- Lecture 1 -->
+          <article class="team-card small-card">
+            <div class="member-photo">
+              <img src="images/events/lecture_crispr.jpg" alt="CRISPR and Modern Biotechnology Keynote" class="lightbox-trigger" />
+            </div>
+            <div class="member-copy">
+              <span class="role-badge">Academic Keynote</span>
+              <h4>CRISPR &amp; Next-Gen Biotechnology</h4>
+              <p>Cutting-edge insights into precision gene editing, ethical boundaries, and biomedical breakthroughs.</p>
+              <div class="card-foot-plain">
+                <a href="registration.html?event=lecture" class="btn btn-primary btn-sm btn-block">Reserve Lecture Seat</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Lecture 2 -->
+          <article class="team-card small-card">
+            <div class="member-photo">
+              <img src="images/events/lecture_bioinnovation.jpg" alt="Bio-Innovation & Career Pathways Lecture" class="lightbox-trigger" />
+            </div>
+            <div class="member-copy">
+              <span class="role-badge">Career &amp; Industry</span>
+              <h4>Bio-Innovation &amp; Career Horizons</h4>
+              <p>Industry veterans discuss high-growth career pathways, patents, and entrepreneurship in scientific domains.</p>
+              <div class="card-foot-plain">
+                <a href="registration.html?event=lecture" class="btn btn-primary btn-sm btn-block">Reserve Lecture Seat</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Lecture 3 -->
+          <article class="team-card small-card">
+            <div class="member-photo">
+              <img src="images/events/lecture_aibiology.png" alt="AI in Life Sciences Lecture" class="lightbox-trigger" />
+            </div>
+            <div class="member-copy">
+              <span class="role-badge">Frontier Tech</span>
+              <h4>AI &amp; Computational Biology</h4>
+              <p>Exploring machine learning models in protein folding, drug discovery, and bioinformatics research.</p>
+              <div class="card-foot-plain">
+                <a href="registration.html?event=lecture" class="btn btn-primary btn-sm btn-block">Reserve Lecture Seat</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       Site Footer
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="brand-logo-wrap">
+          <img src="phoenix-club-logo.png" alt="Phoenix Club emblem" class="footer-logo" />
+        </div>
+        <div class="footer-brand-text">
+          <div class="brand-title">Phoenix Club <span class="brand-title-tag">NUV</span></div>
+          <div class="footer-tagline">Science &bull; Innovation &bull; Leadership</div>
+          <p class="footer-mission">
+            A student-led scientific community at Navrachana University fostering curiosity, hands-on learning, and future-ready leadership.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="footer-title">Navigation</h3>
+        <ul class="footer-links footer-links-2col">
+          <li><a href="index.html">&#8250; Home</a></li>
+          <li><a href="about.html">&#8250; About</a></li>
+          <li><a href="core-team.html">&#8250; Core Team</a></li>
+          <li><a href="committee.html">&#8250; Committee</a></li>
+          <li><a href="events.html">&#8250; All Events</a></li>
+          <li><a href="upcoming-events.html">&#8250; Upcoming Events</a></li>
+          <li><a href="past-events.html">&#8250; Past Events</a></li>
+          <li><a href="past-members.html">&#8250; Past Members</a></li>
+          <li><a href="registration.html" class="footer-link-highlight">&#8250; Registration</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-title">Connect &amp; Engage</h3>
+        <ul class="footer-links">
+          <li><a href="sponsorships.html">&#8250; Sponsorships</a></li>
+          <li><a href="contact.html">&#8250; Contact Us</a></li>
+        </ul>
+        <div class="footer-social-icons">
+          <a href="https://www.instagram.com/phoenix.nuv?stkn=cXU4N2Z2N2Zldnl5" target="_blank" rel="noreferrer" class="footer-social-btn instagram" aria-label="Instagram @phoenix.nuv" title="Instagram: @phoenix.nuv">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+          <a href="mailto:phoenixclub@nuv.ac.in" class="footer-social-btn email" aria-label="Email phoenixclub@nuv.ac.in" title="Email: phoenixclub@nuv.ac.in">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="footer-title">Campus Location</h3>
+        <div class="map-block">
+          <iframe
+            src="https://www.google.com/maps?q=Navrachana%20University%20Vadodara&z=13&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Navrachana University Vadodara Location"
+          ></iframe>
+        </div>
+      </div>
+
+      <div class="footer-copy">
+        <div>
+          &copy; <span id="year">2026</span> Phoenix Club, Navrachana University. All rights reserved.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="navbar.js"></script>
+  <script>
+    // Event Category Filtering
+    document.querySelectorAll('.filter-pill[data-category]').forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        document.querySelectorAll('.filter-pill[data-category]').forEach(p => p.classList.remove('active'));
+        this.classList.add('active');
+        const selectedCat = this.getAttribute('data-category');
+
+        document.querySelectorAll('article[data-category]').forEach(function (card) {
+          const cardCat = card.getAttribute('data-category');
+          if (selectedCat === 'all' || selectedCat === cardCat) {
+            card.style.display = 'flex';
+            card.classList.add('visible');
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        // Guest lectures group visibility
+        const lecturesGroup = document.getElementById('guest-lectures');
+        if (lecturesGroup) {
+          if (selectedCat === 'all' || selectedCat === 'academic') {
+            lecturesGroup.style.display = 'block';
+          } else {
+            lecturesGroup.style.display = 'none';
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -133,9 +133,15 @@ If you type a wrong filename or haven't added the photo yet:
 
 ### Events & Campus Galleries (`images/events/`)
 - `investiture-ceremony.jpg` — Investiture Ceremony 2026
-- `wildlife-week.jpg` — Wildlife Week Celebration
-- `teachers-day.jpg` — Teacher's Day Celebration
+- `wildlife-week.jpg` — Wildlife Week Celebration (HD)
+- `teachers-day.jpg` — Teacher's Day Celebration (Faculty Cake Cutting)
+- `annual-day.jpg` — Annual Day Celebration (Council Traditional Attire)
+- `field-visit.jpg` — Field Visits & Industry Excursions (Biology Field Expedition)
+- `microbiology-day.jpg` — International Microbiology Day (Classroom Session)
 - `guest-lecture.png` — Distinguished Guest Lecture
+- `lecture_crispr.jpg` — CRISPR & Next-Gen Biotechnology Keynote
+- `lecture_bioinnovation.jpg` — Bio-Innovation & Research Pathways
+- `lecture_aibiology.png` — AI & Computational Biology Keynote
 - `campus-group.jpg` — Phoenix Club Student Leadership Group
 - `community-mixer.jpg` — Student Community Mixer & Orientation
 - `science-workshop.jpg` — Science & Innovation Hands-On Workshop

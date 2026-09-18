@@ -96,8 +96,11 @@ def home():
 @app.route("/<path:path>")
 def static_proxy(path):
     """Serve any static html, css, js, image file directly from project root."""
-    if os.path.exists(os.path.join(BASE_DIR, path)):
+    target_path = os.path.join(BASE_DIR, path)
+    if os.path.exists(target_path) and os.path.isfile(target_path):
         return send_from_directory(BASE_DIR, path)
+    if os.path.exists(target_path + ".html"):
+        return send_from_directory(BASE_DIR, path + ".html")
     return "Page Not Found", 404
 
 

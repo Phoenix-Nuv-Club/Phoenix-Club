@@ -54,8 +54,8 @@
           Events <span class="arrow" aria-hidden="true">&#9662;</span>
         </a>
         <ul class="dropdown-menu">
+          <li><a href="events.html">All Events</a></li>
           <li><a href="upcoming-events.html">Upcoming Events</a></li>
-          <li><a href="upcoming-events.html#guest-lectures">Guest Lectures</a></li>
         </ul>
       </li>
 
@@ -121,7 +121,7 @@
     <!-- ==========================================================================
          Year 2026 Council (Current Leadership Legacy)
          ========================================================================== -->
-    <section class="team-section year-section" data-year-section="2026">
+    <section class="team-section year-section" id="council-2026" data-year-section="2026">
       <div class="year-header reveal">
         <h3>Academic Year 2026</h3>
         <span class="year-chip">Current Leadership Council</span>
@@ -199,7 +199,7 @@
     <!-- ==========================================================================
          Year 2025 Council
          ========================================================================== -->
-    <section class="team-section year-section section-gap" data-year-section="2025">
+    <section class="team-section year-section section-gap" id="council-2025" data-year-section="2025">
       <div class="year-header reveal">
         <h3>Academic Year 2025</h3>
         <span class="year-chip">Executive Council</span>
@@ -277,7 +277,7 @@
     <!-- ==========================================================================
          Year 2024 Council
          ========================================================================== -->
-    <section class="team-section year-section section-gap" data-year-section="2024">
+    <section class="team-section year-section section-gap" id="council-2024" data-year-section="2024">
       <div class="year-header reveal">
         <h3>Academic Year 2024</h3>
         <span class="year-chip">Growth Council</span>
@@ -384,6 +384,7 @@
         <li><a href="about.html">&#8250; About</a></li>
         <li><a href="core-team.html">&#8250; Core Team</a></li>
         <li><a href="committee.html">&#8250; Committee</a></li>
+        <li><a href="events.html">&#8250; All Events</a></li>
         <li><a href="upcoming-events.html">&#8250; Upcoming Events</a></li>
         <li><a href="past-events.html">&#8250; Past Events</a></li>
         <li><a href="past-members.html">&#8250; Past Members</a></li>
@@ -429,25 +430,62 @@
 
   <script src="navbar.js"></script>
   <script>
-    // Year Filter Tabs
+    // Year Filter Tabs & Deep Linking
+    function applyYearFilter(selectedYear, shouldScroll) {
+      var targetPill = document.querySelector('.filter-pill[data-year="' + selectedYear + '"]');
+      if (targetPill) {
+        document.querySelectorAll('.filter-pill[data-year]').forEach(function (p) {
+          p.classList.remove('active');
+        });
+        targetPill.classList.add('active');
+      }
+
+      document.querySelectorAll('[data-year-section]').forEach(function (sec) {
+        var secYear = sec.getAttribute('data-year-section');
+        if (selectedYear === 'all' || selectedYear === secYear) {
+          sec.style.display = 'block';
+          sec.querySelectorAll('.reveal').forEach(function (r) {
+            r.classList.add('visible');
+          });
+        } else {
+          sec.style.display = 'none';
+        }
+      });
+
+      if (shouldScroll && selectedYear !== 'all') {
+        var targetSection = document.getElementById('council-' + selectedYear) || document.querySelector('[data-year-section="' + selectedYear + '"]');
+        if (targetSection) {
+          setTimeout(function () {
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 120);
+        }
+      }
+    }
+
     document.querySelectorAll('.filter-pill[data-year]').forEach(function (pill) {
       pill.addEventListener('click', function () {
-        document.querySelectorAll('.filter-pill[data-year]').forEach(p => p.classList.remove('active'));
-        this.classList.add('active');
-        const selectedYear = this.getAttribute('data-year');
-
-        document.querySelectorAll('[data-year-section]').forEach(function (sec) {
-          const secYear = sec.getAttribute('data-year-section');
-          if (selectedYear === 'all' || selectedYear === secYear) {
-            sec.style.display = 'block';
-            sec.querySelectorAll('.reveal').forEach(function (r) {
-              r.classList.add('visible');
-            });
-          } else {
-            sec.style.display = 'none';
-          }
-        });
+        var year = this.getAttribute('data-year');
+        applyYearFilter(year, false);
       });
+    });
+
+    // Check URL query parameters (?year=2024) or hash (#council-2024) on page load
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var queryYear = params.get('year');
+      var hashYear = window.location.hash.replace('#council-', '').replace('#year-', '').replace('#', '');
+      var activeYear = queryYear || hashYear;
+
+      if (activeYear && ['2024', '2025', '2026', 'all'].indexOf(activeYear) !== -1) {
+        applyYearFilter(activeYear, true);
+      }
+    })();
+
+    window.addEventListener('hashchange', function () {
+      var hashYear = window.location.hash.replace('#council-', '').replace('#year-', '').replace('#', '');
+      if (hashYear && ['2024', '2025', '2026', 'all'].indexOf(hashYear) !== -1) {
+        applyYearFilter(hashYear, true);
+      }
     });
   </script>
 </body>
