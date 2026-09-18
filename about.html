@@ -21,7 +21,7 @@
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
       gap: 36px;
-      align-items: center;
+      align-items: stretch;
       margin-top: 36px;
     }
     .about-visual-card {
@@ -29,12 +29,30 @@
       overflow: hidden;
       box-shadow: var(--shadow-md);
       border: 1px solid var(--border-subtle);
-      height: 420px;
+      height: 100%;
+      min-height: 480px;
+      display: flex;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+    .about-visual-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 20px 42px rgba(0, 0, 0, 0.22), 0 0 0 2px rgba(249, 115, 22, 0.5);
+      border-color: var(--flame-400);
+      z-index: 10;
     }
     .about-visual-card img {
       width: 100%;
       height: 100%;
+      flex: 1;
       object-fit: cover;
+      object-position: center 60%;
+      display: block;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .about-visual-card:hover img {
+      transform: scale(1.04);
     }
     .info-list-grid {
       display: grid;
@@ -209,6 +227,10 @@
       .about-intro-grid, .mission-grid {
         grid-template-columns: 1fr;
       }
+      .about-visual-card {
+        height: 380px;
+        min-height: 0;
+      }
       .values-grid, .year-selector-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -368,7 +390,7 @@
         </div>
 
         <div class="about-visual-card">
-          <img src="images/events/students-collaborating.jpg" alt="Students collaborating at Navrachana University" class="lightbox-trigger" />
+          <img src="images/events/phoenix-team-gathering.jpg" alt="Phoenix Club gathering and team members at Navrachana University" class="lightbox-trigger" />
         </div>
       </div>
     </section>
