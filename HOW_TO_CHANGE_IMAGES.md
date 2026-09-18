@@ -131,6 +131,14 @@ If you type a wrong filename or haven't added the photo yet:
 - `media-pushti-parekh.jpg` — Pushti Parekh (Social Media Lead)
 - `media-vidhi-desai.jpg` — Vidhi Desai (Digital Media Coordinator)
 
+### 2025 Alumni Council Members (`images/team/`)
+- `2025-president-raj-nandani.jpg` — Raj Nandani (President 2025)
+- `2025-vice-president-sidhi.jpg` — Sidhi (Vice President 2025)
+- `2025-secretary-drashti-gosai.jpg` — Drashti Gosai (Secretary 2025)
+- `2025-treasurer-krishna-patel.jpg` — Krishna Patel (Treasurer 2025)
+- `2025-media-head-dwija-patel.jpg` — Dwija Patel (Media Head 2025)
+- `2025-technical-head-tannushree-shah.jpg` — Tannushree Shah (Technical Head 2025)
+
 ### Events & Campus Galleries (`images/events/`)
 - `investiture-ceremony.jpg` — Investiture Ceremony 2026
 - `wildlife-week.jpg` — Wildlife Week Celebration (HD)
