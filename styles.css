@@ -1007,8 +1007,13 @@ textarea.form-control {
   justify-content: center;
   align-items: center;
   pointer-events: none;
-  opacity: 0.04;
+  opacity: 0.14;
   z-index: 0;
+  transition: opacity var(--transition-base);
+}
+
+[data-theme="dark"] .hero-backdrop {
+  opacity: 0.12;
 }
 
 .hero-bg-logo {
