@@ -2159,55 +2159,63 @@ textarea.form-control {
   font-weight: 800;
 }
 
-/* Sleek Social Icon Buttons in Footer */
+/* Premium Social Icon Buttons in Footer */
 .footer-social-icons {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 14px;
+  gap: 14px;
+  margin-top: 16px;
 }
 
 .footer-social-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: #1e293b;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #94a3b8;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
   text-decoration: none;
-  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.25s ease,
+              border-color 0.25s ease,
+              box-shadow 0.25s ease,
+              color 0.25s ease;
   position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
 }
 
 .footer-social-btn svg {
-  width: 20px;
-  height: 20px;
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 24px;
+  height: 24px;
+  stroke-width: 2;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .footer-social-btn:hover {
   color: #ffffff;
-  transform: translateY(-3px) scale(1.08);
+  transform: translateY(-4px) scale(1.06);
 }
 
 .footer-social-btn.instagram:hover {
-  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-  border-color: transparent;
-  box-shadow: 0 6px 20px rgba(214, 36, 159, 0.5);
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(220, 39, 67, 0.45), 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 .footer-social-btn.email:hover {
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-  border-color: transparent;
-  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
+  background: linear-gradient(135deg, #f97316 0%, #e11d48 100%);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(249, 115, 22, 0.45), 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 .footer-social-btn:hover svg {
-  transform: scale(1.15);
+  transform: scale(1.1);
 }
+
 
 
 .footer-admin-link {
