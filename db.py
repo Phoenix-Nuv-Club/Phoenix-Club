@@ -140,6 +140,19 @@ def init_db():
     );
     """)
 
+    # 8. Contact Messages table
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS contact_messages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        full_name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        purpose TEXT NOT NULL,
+        message TEXT NOT NULL,
+        ip_address TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+
     # Indexes for lightning-fast queries
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_reg_enrollment ON registrations(enrollment_id);")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_reg_event ON registrations(event_id);")
@@ -148,6 +161,7 @@ def init_db():
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_reg_archived ON registrations(is_archived);")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_students_enrollment ON students(enrollment_id);")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_activity_timestamp ON activity_logs(timestamp);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_contact_created ON contact_messages(created_at);")
 
     conn.commit()
     conn.close()

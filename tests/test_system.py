@@ -42,7 +42,7 @@ class PhoenixClubSystemTests(unittest.TestCase):
         tables = [r["name"] for r in cursor.fetchall()]
         conn.close()
 
-        expected = ["admins", "events", "students", "registrations", "attendance_records", "activity_logs", "settings"]
+        expected = ["admins", "events", "students", "registrations", "attendance_records", "activity_logs", "settings", "contact_messages"]
         for t in expected:
             self.assertIn(t, tables, f"Table '{t}' must exist in SQLite database.")
         print("[TEST PASS] Database tables and schema verified.")
@@ -220,7 +220,23 @@ class PhoenixClubSystemTests(unittest.TestCase):
         self.assertTrue(len(logs) > 0)
         actions = [l["action"] for l in logs]
         self.assertIn("ADMIN_LOGIN", actions)
-        print(f"[TEST PASS] Audit activity logs verified ({len(logs)} entries logged).")
+    def test_12_contact_submission(self):
+        """Verify public contact form inquiry submission and validation."""
+        # 1. Invalid input check
+        bad_res = self.client.post("/api/contact", json={"full_name": ""})
+        self.assertEqual(bad_res.status_code, 400)
+
+        # 2. Valid contact inquiry submission
+        good_res = self.client.post("/api/contact", json={
+            "full_name": "Test Student",
+            "email": "test.student@nuv.ac.in",
+            "purpose": "General Student Inquiry",
+            "message": "Testing contact inquiry persistence."
+        })
+        self.assertEqual(good_res.status_code, 201)
+        data = good_res.get_json()
+        self.assertTrue(data["success"])
+        print("[TEST PASS] Contact form submission and validation verified.")
 
 
 if __name__ == "__main__":

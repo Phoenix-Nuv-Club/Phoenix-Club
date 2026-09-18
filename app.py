@@ -6,9 +6,12 @@ Flask 3.1 Web Application & REST API
 import os
 import io
 import csv
+import json
 import re
 import random
 import string
+import urllib.request
+import urllib.error
 from datetime import datetime, date
 from flask import (
     Flask, request, jsonify, render_template, send_from_directory,
@@ -51,6 +54,33 @@ def is_valid_email(email):
     """Validate email format with regex."""
     pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
     return re.match(pattern, email.strip()) is not None
+
+
+def send_to_google_sheet(payload, webhook_url=None):
+    """Forward form submission data to Google Sheets Web App endpoint if configured."""
+    target_url = (
+        webhook_url
+        or os.environ.get("GOOGLE_SHEET_WEBHOOK_URL")
+        or os.environ.get("GOOGLE_SHEETS_WEBHOOK_URL")
+    )
+    if not target_url or not target_url.startswith("http"):
+        return False, "Google Sheet webhook URL not configured."
+
+    try:
+        req_data = json.dumps(payload).encode("utf-8")
+        req = urllib.request.Request(
+            target_url,
+            data=req_data,
+            headers={
+                "Content-Type": "application/json",
+                "User-Agent": "Phoenix-Club-Server/1.0"
+            }
+        )
+        with urllib.request.urlopen(req, timeout=6) as resp:
+            return True, "Synced to Google Sheet"
+    except Exception as e:
+        print(f"[Google Sheets Sync Notice] {e}")
+        return False, str(e)
 
 
 # ==============================================================================
@@ -122,6 +152,64 @@ def get_active_events():
     return jsonify({"events": events})
 
 
+@app.route("/api/contact", methods=["POST"])
+def submit_contact_message():
+    """Handle public contact inquiry submissions, store in DB and sync to Google Sheets."""
+    data = request.get_json() or {}
+    full_name = (data.get("full_name") or data.get("name") or "").strip()
+    email = (data.get("email") or "").strip().lower()
+    purpose = (data.get("purpose") or data.get("subject") or "General Student Inquiry").strip()
+    message = (data.get("message") or "").strip()
+
+    errors = []
+    if not full_name:
+        errors.append("Full Name is required.")
+    if not email or not is_valid_email(email):
+        errors.append("A valid Email address is required.")
+    if not message:
+        errors.append("Message / Proposal content is required.")
+
+    if errors:
+        return jsonify({"error": "Validation Error", "messages": errors}), 400
+
+    # Save to SQLite DB
+    conn = db.get_db()
+    cursor = conn.cursor()
+    ip_addr = request.headers.get("X-Forwarded-For", request.remote_addr)
+    cursor.execute("""
+    INSERT INTO contact_messages (full_name, email, purpose, message, ip_address)
+    VALUES (?, ?, ?, ?, ?)
+    """, (full_name, email, purpose, message, ip_addr))
+    msg_id = cursor.lastrowid
+
+    # Activity Log
+    cursor.execute("""
+    INSERT INTO activity_logs (admin_name, action, record_type, record_id, details, ip_address)
+    VALUES ('Contact Form', 'CONTACT_MESSAGE', 'contact', ?, ?, ?)
+    """, (str(msg_id), f"Inquiry from {full_name} ({email}) - {purpose}", ip_addr))
+
+    conn.commit()
+    conn.close()
+
+    # Forward to Google Sheets Webhook
+    sheet_payload = {
+        "form_type": "contact",
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "full_name": full_name,
+        "email": email,
+        "purpose": purpose,
+        "message": message
+    }
+    synced, sheet_msg = send_to_google_sheet(sheet_payload)
+
+    return jsonify({
+        "success": True,
+        "message": "Thank you! Your message has been sent successfully. A core council representative will get back to you shortly.",
+        "id": msg_id,
+        "google_sheets_synced": synced
+    }), 201
+
+
 @app.route("/api/register", methods=["POST"])
 def submit_public_registration():
     """Public registration submission with strict validation and duplicate prevention."""
@@ -158,32 +246,28 @@ def submit_public_registration():
     conn = db.get_db()
     cursor = conn.cursor()
 
-    # Resolve event
-    event = None
+    # Verify active event
     if event_id:
         cursor.execute("SELECT * FROM events WHERE id = ? AND is_active = 1 AND is_archived = 0", (event_id,))
         event = cursor.fetchone()
     elif event_name:
-        cursor.execute("SELECT * FROM events WHERE (title = ? OR title LIKE ?) AND is_active = 1 AND is_archived = 0",
-                       (event_name, f"%{event_name}%"))
+        cursor.execute("SELECT * FROM events WHERE (title = ? OR title LIKE ?) AND is_active = 1 AND is_archived = 0 ORDER BY id ASC", (event_name, f"%{event_name}%"))
+        event = cursor.fetchone()
+    else:
+        cursor.execute("SELECT * FROM events WHERE is_active = 1 AND is_archived = 0 ORDER BY id ASC LIMIT 1")
         event = cursor.fetchone()
 
     if not event:
         conn.close()
-        return jsonify({"error": "Event Not Found", "messages": ["The selected event is either inactive, closed, or does not exist."]}), 404
+        return jsonify({"error": "Event not found or registration is currently closed."}), 404
 
-    event = dict(event)
-
-    # Check capacity
-    cursor.execute("SELECT COUNT(*) as count FROM registrations WHERE event_id = ? AND is_archived = 0", (event["id"],))
-    count_row = cursor.fetchone()
-    current_regs = count_row["count"] if count_row else 0
-    if event["capacity"] > 0 and current_regs >= event["capacity"]:
-        conn.close()
-        return jsonify({
-            "error": "Capacity Reached",
-            "messages": [f"Registration for '{event['title']}' is currently closed because it has reached maximum capacity ({event['capacity']} attendees)."]
-        }), 400
+    # Capacity check
+    if event["capacity"] > 0:
+        cursor.execute("SELECT COUNT(id) as count FROM registrations WHERE event_id = ? AND is_archived = 0", (event["id"],))
+        curr_count = cursor.fetchone()["count"]
+        if curr_count >= event["capacity"]:
+            conn.close()
+            return jsonify({"error": "Event capacity reached. Registration is now closed."}), 400
 
     # Prevent accidental duplicate registration (Requirement 2 & 4)
     cursor.execute("""
@@ -243,6 +327,23 @@ def submit_public_registration():
 
     conn.commit()
     conn.close()
+
+    # Sync registration to Google Sheets Webhook
+    reg_payload = {
+        "form_type": "registration",
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "reg_code": reg_code,
+        "full_name": full_name,
+        "enrollment_id": enrollment_id,
+        "department": department,
+        "academic_year": academic_year,
+        "email": email,
+        "phone": phone,
+        "event_name": event["title"],
+        "event_date": f"{event['event_date']} | {event['event_time']}",
+        "additional_info": additional_info
+    }
+    send_to_google_sheet(reg_payload)
 
     return jsonify({
         "success": True,

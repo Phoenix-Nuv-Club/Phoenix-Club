@@ -18,14 +18,17 @@ document.addEventListener('DOMContentLoaded', function () {
   function initThemeToggle() {
     let currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
 
+    const sunIconSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+    const moonIconSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+
     function updateButtonUI(btn) {
       if (!btn) return;
       if (currentTheme === 'dark') {
-        btn.innerHTML = '<span class="theme-icon">&#9728;&#65039;</span><span class="theme-label">Light</span>';
-        btn.setAttribute('title', 'Switch to White / Light Mode');
-        btn.setAttribute('aria-label', 'Switch to White / Light Mode');
+        btn.innerHTML = '<span class="theme-icon">' + sunIconSvg + '</span><span class="theme-label">Light</span>';
+        btn.setAttribute('title', 'Switch to Light Mode');
+        btn.setAttribute('aria-label', 'Switch to Light Mode');
       } else {
-        btn.innerHTML = '<span class="theme-icon">&#127769;</span><span class="theme-label">Dark</span>';
+        btn.innerHTML = '<span class="theme-icon">' + moonIconSvg + '</span><span class="theme-label">Dark</span>';
         btn.setAttribute('title', 'Switch to Dark Mode');
         btn.setAttribute('aria-label', 'Switch to Dark Mode');
       }
@@ -52,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('phoenix-theme', currentTheme);
         updateButtonUI(toggleBtn);
         if (window.showToast) {
-          window.showToast(currentTheme === 'dark' ? 'Dark Theme Activated \u{1F319}' : 'Light Theme Activated \u2600\uFE0F', 2000);
+          window.showToast(currentTheme === 'dark' ? 'Dark theme enabled' : 'Light theme enabled', 1800);
         }
       });
     }

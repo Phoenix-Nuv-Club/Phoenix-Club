@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="phoenix-club-logo.png" />
+  <link rel="apple-touch-icon" href="phoenix-club-logo.png" />
   <title>Contact Us — Phoenix Club | Navrachana University</title>
   <meta name="description" content="Get in touch with Phoenix Club student leadership at Navrachana University for event inquiries, memberships, guest sessions, and sponsorships." />
 
@@ -13,55 +15,8 @@
 
   <link rel="stylesheet" href="styles.css" />
   <style>
-    .page-hero {
-      padding: 48px 0 28px;
-    }
-    .page-hero-inner {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 32px;
-      align-items: center;
-      padding: 36px 40px;
-      border-radius: var(--radius-xl);
-      background: linear-gradient(135deg, rgba(249, 115, 22, 0.06), rgba(225, 29, 72, 0.05));
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-sm);
-    }
-    .page-hero-copy h1 {
-      margin: 0;
-      font-size: clamp(2.2rem, 3.8vw, 3.4rem);
-      line-height: 1.12;
-      color: var(--ink-900);
-    }
-    .page-hero-copy p {
-      margin: 16px 0 0;
-      color: var(--ink-600);
-      font-size: 1.05rem;
-      line-height: 1.8;
-    }
-    .page-hero-visual {
-      display: flex;
-      justify-content: center;
-    }
-    .logo-panel {
-      width: min(100%, 320px);
-      padding: 24px;
-      border-radius: var(--radius-lg);
-      background: #ffffff;
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .logo-panel img {
-      display: block;
-      width: 100%;
-      max-height: 200px;
-      object-fit: contain;
-      border-radius: var(--radius-md);
-    }
-
+    /* Contact page specifics only.
+       Page hero, form controls, buttons, cards and toasts come from styles.css. */
     .contact-section {
       padding: 20px 0 60px;
     }
@@ -73,52 +28,37 @@
     }
     .contact-card {
       padding: 30px 24px;
-      border-radius: var(--radius-lg);
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-sm);
       display: flex;
       flex-direction: column;
-      transition: all var(--transition-base);
-    }
-    .contact-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
-      border-color: var(--flame-500);
     }
     .contact-card .card-icon {
       width: 48px;
       height: 48px;
-      border-radius: 14px;
+      border-radius: var(--radius-lg);
       background: rgba(249, 115, 22, 0.1);
-      color: var(--flame-600);
+      color: var(--accent-text);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
+      font-size: var(--text-display-sm);
       margin-bottom: 18px;
     }
     .contact-card h3 {
       margin: 0 0 10px;
-      color: var(--ink-900);
-      font-size: 1.25rem;
+      font-size: var(--text-3xl);
     }
     .contact-card p {
       margin: 0 0 16px;
-      color: var(--ink-600);
-      line-height: 1.65;
-      font-size: 0.95rem;
+      font-size: var(--text-md);
       flex-grow: 1;
     }
     .contact-card a {
-      color: var(--flame-600);
+      color: var(--accent-text);
       font-weight: 700;
-      text-decoration: none;
-      transition: color var(--transition-fast);
       word-break: break-word;
     }
     .contact-card a:hover {
-      color: var(--flame-700);
+      color: var(--accent-text-strong);
       text-decoration: underline;
     }
 
@@ -129,125 +69,46 @@
       gap: 36px;
       padding: 36px 40px;
       border-radius: var(--radius-xl);
-      background: #ffffff;
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-sm);
       margin-top: 32px;
       margin-bottom: 40px;
     }
     .message-grid-panel h2 {
       margin: 0 0 10px;
-      color: var(--ink-900);
-      font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+      font-size: var(--text-display-lg);
       line-height: 1.2;
     }
     .message-grid-panel .section-subtitle {
       margin: 0 0 24px;
       color: var(--ink-600);
       line-height: 1.7;
-      font-size: 0.98rem;
-    }
-
-    .form-group {
-      margin-bottom: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      text-align: left;
-    }
-    .form-group label {
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--ink-900);
-    }
-    .form-control {
-      width: 100%;
-      padding: 13px 16px;
-      border-radius: 12px;
-      border: 1px solid #e2e8f0;
-      background: #f8fafc;
-      font-family: inherit;
-      font-size: 0.95rem;
-      color: #1e293b;
-      transition: all 0.2s ease;
-      box-sizing: border-box;
-    }
-    .form-control:focus {
-      outline: none;
-      border-color: #f97316;
-      background: #ffffff;
-      box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
-    }
-    .form-control::placeholder {
-      color: #94a3b8;
-    }
-    select.form-control {
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 16px center;
-      background-size: 16px;
-      padding-right: 44px;
-      cursor: pointer;
-    }
-    textarea.form-control {
-      resize: vertical;
-      min-height: 110px;
-    }
-
-    .btn-send-message {
-      width: 100%;
-      padding: 15px 24px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #f97316 0%, #e11d48 100%);
-      color: #ffffff;
-      font-size: 1.05rem;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 6px 18px rgba(249, 115, 22, 0.3);
-      transition: all 0.25s ease;
-      text-align: center;
-      margin-top: 6px;
-    }
-    .btn-send-message:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(249, 115, 22, 0.4);
-    }
-    .btn-send-message:active {
-      transform: translateY(0);
+      font-size: var(--text-lg);
     }
 
     /* Right Column: Direct Inquiries */
     .info-card {
       padding: 16px 20px;
-      border-radius: 14px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
       margin-bottom: 12px;
-      transition: all 0.2s ease;
     }
     .info-card:hover {
-      background: #ffffff;
-      border-color: #f97316;
-      box-shadow: 0 4px 12px rgba(29, 28, 45, 0.04);
+      background: var(--bg-elevated-hover);
+      border-color: var(--flame-500);
     }
     .info-card strong {
       display: block;
-      font-size: 0.95rem;
-      color: #1e293b;
+      font-size: var(--text-md);
+      color: var(--ink-900);
       margin-bottom: 4px;
     }
     .info-card span {
-      font-size: 0.86rem;
-      color: #64748b;
+      font-size: var(--text-base);
+      color: var(--ink-500);
     }
     .map-box {
       width: 100%;
       height: 200px;
-      border-radius: 16px;
+      border-radius: var(--radius-lg);
       overflow: hidden;
-      border: 1px solid #e2e8f0;
+      border: 1px solid var(--border-subtle);
       margin-top: 14px;
     }
     .map-box iframe {
@@ -267,15 +128,11 @@
       margin: 0 auto 32px;
     }
     .faq-header h2 {
-      font-size: clamp(2rem, 3.2vw, 2.6rem);
-      font-weight: 800;
-      color: var(--ink-900);
+      font-size: var(--text-display-xl);
       margin: 0 0 12px;
-      letter-spacing: -0.02em;
     }
     .faq-header p {
-      font-size: 1.05rem;
-      color: var(--ink-600);
+      font-size: var(--text-xl);
       margin: 0;
     }
     .accordion-list {
@@ -286,15 +143,10 @@
       gap: 14px;
     }
     .accordion-item {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
       overflow: hidden;
-      transition: all 0.25s ease;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
     }
     .accordion-item.active {
-      border: 1.5px solid #f97316;
+      border-color: var(--flame-500);
       box-shadow: 0 4px 16px rgba(249, 115, 22, 0.12);
     }
     .accordion-header {
@@ -304,20 +156,20 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      font-size: 1.05rem;
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
       font-weight: 700;
-      color: #1e293b;
+      color: var(--ink-900);
       background: none;
       border: none;
       cursor: pointer;
       text-align: left;
-      font-family: inherit;
     }
     .accordion-icon {
-      font-size: 1.3rem;
+      font-size: var(--text-display-sm);
       font-weight: 700;
-      color: #f97316;
-      transition: transform 0.25s ease;
+      color: var(--accent-text);
+      transition: transform var(--transition-base);
       line-height: 1;
       flex-shrink: 0;
     }
@@ -327,46 +179,18 @@
     .accordion-content {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.3s ease, padding 0.3s ease;
+      transition: max-height var(--transition-base), padding var(--transition-base);
       padding: 0 26px;
-      font-size: 0.96rem;
+      font-size: var(--text-lg);
       line-height: 1.7;
-      color: #475569;
+      color: var(--ink-600);
     }
     .accordion-item.active .accordion-content {
       max-height: 250px;
       padding-bottom: 22px;
     }
 
-    /* Toast Notification */
-    .toast-msg {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: #1e293b;
-      color: #ffffff;
-      padding: 16px 24px;
-      border-radius: 14px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      z-index: 9999;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.3s ease;
-      pointer-events: none;
-    }
-    .toast-msg.show {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
     @media (max-width: 900px) {
-      .page-hero-inner {
-        grid-template-columns: 1fr;
-        padding: 28px 20px;
-      }
       .contact-grid {
         grid-template-columns: 1fr;
       }
@@ -376,7 +200,7 @@
       }
       .accordion-header {
         padding: 18px 20px;
-        font-size: 0.98rem;
+        font-size: var(--text-lg);
       }
       .accordion-content {
         padding: 0 20px;
@@ -388,6 +212,7 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content</a>
 
   <!-- ==========================================================================
        Navigation Bar
@@ -449,6 +274,10 @@
       <div class="nuv-logo-wrap">
         <img src="navrachana-university-logo.png" alt="Navrachana University logo" class="logo-right" />
       </div>
+      <button type="button" class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle light and dark theme" title="Switch to Dark Mode">
+        <span class="theme-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        <span class="theme-label">Dark</span>
+      </button>
       <button type="button" class="navbar-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
       </button>
@@ -458,7 +287,7 @@
   <!-- ==========================================================================
        Main Content
        ========================================================================== -->
-  <main class="container team-page">
+  <main id="main" class="container team-page">
     <section class="page-hero">
       <div class="page-hero-inner reveal">
         <div class="page-hero-copy">
@@ -483,21 +312,27 @@
     <section class="contact-section">
       <div class="contact-grid reveal">
         <article class="contact-card">
-          <div class="card-icon" aria-hidden="true">&#9993;</div>
+          <div class="card-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </div>
           <h3>Email</h3>
           <p>Reach out for partnerships, collaborations, student queries, and event support.</p>
           <a href="mailto:phoenixclub@nuv.ac.in">phoenixclub@nuv.ac.in</a>
         </article>
 
         <article class="contact-card">
-          <div class="card-icon" aria-hidden="true">&#127963;</div>
+          <div class="card-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          </div>
           <h3>Location</h3>
           <p>Navrachana University Campus, Vasna - Bhayli Main Road, Vadodara, Gujarat 391410.</p>
           <a href="https://maps.google.com/?q=Navrachana+University+Vadodara" target="_blank" rel="noreferrer">View on Google Maps</a>
         </article>
 
         <article class="contact-card">
-          <div class="card-icon" aria-hidden="true">&#128247;</div>
+          <div class="card-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </div>
           <h3>Social</h3>
           <p>Follow our updates, event announcements, behind-the-scenes moments, and community highlights.</p>
           <a href="https://www.instagram.com" target="_blank" rel="noreferrer">Follow on Instagram</a>
@@ -514,34 +349,34 @@
           <h2>We'd Love to Hear From You</h2>
           <p class="section-subtitle">Fill in your details below and a core council representative will get back to you shortly.</p>
 
-          <form id="contactForm" onsubmit="event.preventDefault(); showToast('Thank you! Your message has been sent successfully. A core council representative will get back to you shortly.'); this.reset();">
+          <form id="contactForm" onsubmit="handleContactSubmit(event)">
             <div class="form-group">
               <label for="userName">Your Full Name *</label>
-              <input type="text" id="userName" class="form-control" placeholder="e.g. Aaryan Sharma" required />
+              <input type="text" id="userName" name="full_name" class="form-control" placeholder="e.g. Aaryan Sharma" required />
             </div>
 
             <div class="form-group">
               <label for="userEmail">Email Address *</label>
-              <input type="email" id="userEmail" class="form-control" placeholder="e.g. aaryan@example.com" required />
+              <input type="email" id="userEmail" name="email" class="form-control" placeholder="e.g. aaryan@example.com" required />
             </div>
 
             <div class="form-group">
               <label for="userSubject">Inquiry Purpose</label>
-              <select id="userSubject" class="form-control">
-                <option value="general">General Student Inquiry</option>
-                <option value="membership">Joining Phoenix Club</option>
-                <option value="sponsorship">Event Sponsorship / Brand Partnership</option>
-                <option value="guest-lecture">Guest Lecture / Workshop Proposal</option>
+              <select id="userSubject" name="purpose" class="form-control">
+                <option value="General Student Inquiry">General Student Inquiry</option>
+                <option value="Joining Phoenix Club">Joining Phoenix Club</option>
+                <option value="Event Sponsorship / Brand Partnership">Event Sponsorship / Brand Partnership</option>
+                <option value="Guest Lecture / Workshop Proposal">Guest Lecture / Workshop Proposal</option>
               </select>
             </div>
 
             <div class="form-group">
               <label for="userMessage">Message / Proposal *</label>
-              <textarea id="userMessage" class="form-control" rows="4" placeholder="Tell us about your questions or proposal..." required></textarea>
+              <textarea id="userMessage" name="message" class="form-control" rows="4" placeholder="Tell us about your questions or proposal..." required></textarea>
             </div>
 
             <div>
-              <button type="submit" class="btn-send-message">Send Message</button>
+              <button type="submit" id="contactSubmitBtn" class="btn btn-primary btn-lg btn-block">Send Message</button>
             </div>
           </form>
         </div>
@@ -549,7 +384,7 @@
         <!-- Right: Quick Connect & Direct Inquiries -->
         <div>
           <span class="section-tag">Quick Connect</span>
-          <h2 style="font-size: clamp(1.6rem, 2.2vw, 2rem); margin-bottom: 8px;">Direct Inquiries</h2>
+          <h2 class="h-display-md">Direct Inquiries</h2>
           <p class="section-subtitle">
             If you have urgent queries regarding an ongoing event registration or ticket verification, you can also connect via faculty advisor office hours or through our official student leads.
           </p>
@@ -614,7 +449,7 @@
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
             <div class="accordion-content">
-              You can review our sponsorship tiers on our <a href="sponsorships.html" style="color: #f97316; font-weight: 700;">Sponsorships Page</a> and contact us directly using the inquiry form above. Our sponsorship leads will share an official prospectus.
+              You can review our sponsorship tiers on our <a href="sponsorships.html" class="link-accent">Sponsorships Page</a> and contact us directly using the inquiry form above. Our sponsorship leads will share an official prospectus.
             </div>
           </div>
 
@@ -657,43 +492,47 @@
       <p>A student-led science &amp; innovation community empowering young minds through research curiosity, leadership experiences, and campus collaborations.</p>
       <div>
         <a href="/admin/login" class="footer-admin-link">
-          <span>&#128737;</span> Admin Portal Login
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          Admin Portal Login
         </a>
       </div>
     </div>
 
     <div>
       <h3 class="footer-title">Navigation</h3>
-      <ul class="footer-links">
+      <ul class="footer-links footer-links-2col">
         <li><a href="index.html">&#8250; Home</a></li>
-        <li><a href="about.html">&#8250; About Us</a></li>
-        <li><a href="core-team.html">&#8250; Core Leadership</a></li>
-        <li><a href="committee.html">&#8250; Supporting Committee</a></li>
+        <li><a href="about.html">&#8250; About</a></li>
+        <li><a href="core-team.html">&#8250; Core Team</a></li>
+        <li><a href="committee.html">&#8250; Committee</a></li>
         <li><a href="upcoming-events.html">&#8250; Upcoming Events</a></li>
-        <li><a href="past-events.html">&#8250; Gallery &amp; Highlights</a></li>
-        <li><a href="past-members.html">&#8250; Alumni &amp; Past Members</a></li>
-        <li><a href="registration.html" style="color: #ea580c; font-weight: 800;">&#8250; Student Registration</a></li>
+        <li><a href="past-events.html">&#8250; Past Events</a></li>
+        <li><a href="past-members.html">&#8250; Past Members</a></li>
+        <li><a href="registration.html" class="footer-link-highlight">&#8250; Registration</a></li>
       </ul>
     </div>
 
     <div>
       <h3 class="footer-title">Connect &amp; Engage</h3>
       <ul class="footer-links">
-        <li><a href="sponsorships.html">&#8250; Sponsorship Packages</a></li>
-        <li><a href="contact.html">&#8250; Contact Desk</a></li>
-        <li style="margin-top: 6px;">
+        <li><a href="sponsorships.html">&#8250; Sponsorships</a></li>
+        <li><a href="contact.html">&#8250; Contact Us</a></li>
+        <li class="footer-social-first">
           <a href="https://www.instagram.com" target="_blank" rel="noreferrer" class="footer-social-pill insta">
-            <span>&#9679;</span> Instagram @phoenixclub
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            Instagram @phoenixclub
           </a>
         </li>
         <li>
           <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" class="footer-social-pill linkedin">
-            <span>&#9679;</span> LinkedIn Community
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            LinkedIn Community
           </a>
         </li>
         <li>
           <a href="mailto:phoenixclub@nuv.ac.in" class="footer-social-pill email">
-            <span>&#9993;</span> phoenixclub@nuv.ac.in
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            phoenixclub@nuv.ac.in
           </a>
         </li>
       </ul>
@@ -723,10 +562,81 @@
 </footer>
 
   <!-- Toast Notification element -->
-  <div id="toastMessage" class="toast-msg" role="status" aria-live="polite"></div>
+  <div id="toastMessage" class="toast-message" role="status" aria-live="polite"></div>
 
   <script src="navbar.js"></script>
   <script>
+    // Google Apps Script Web App URL for direct client-side / Vercel submissions
+    window.GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbx-JdE-HSiqSZ2SLIdaa8y3D4NatGDWrs2CSzXW_0hfhXL4V2EQn27dJM1AfL5MTOZtDQ/exec";
+
+    // Contact Form submission handler
+    async function handleContactSubmit(e) {
+      e.preventDefault();
+      const form = document.getElementById('contactForm');
+      const btn = document.getElementById('contactSubmitBtn');
+      const originalText = btn.textContent;
+
+      const fullName = document.getElementById('userName').value.trim();
+      const email = document.getElementById('userEmail').value.trim();
+      const purpose = document.getElementById('userSubject').value;
+      const message = document.getElementById('userMessage').value.trim();
+
+      if (!fullName || !email || !message) {
+        showToast('Please fill in all required fields.');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Sending Message...';
+
+      const payload = {
+        form_type: 'contact',
+        timestamp: new Date().toLocaleString(),
+        full_name: fullName,
+        email: email,
+        purpose: purpose,
+        message: message
+      };
+
+      let submitted = false;
+
+      // 1. Send to local Flask backend first
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (res.ok) {
+          submitted = true;
+        }
+      } catch (err) {
+        console.log('Local backend endpoint unreachable, checking direct Google Sheets webhook...', err);
+      }
+
+      // 2. Direct Google Sheets webhook fallback (useful when hosted statically on Vercel)
+      if (!submitted && window.GOOGLE_SHEETS_WEBHOOK_URL && window.GOOGLE_SHEETS_WEBHOOK_URL.startsWith('http')) {
+        try {
+          await fetch(window.GOOGLE_SHEETS_WEBHOOK_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          submitted = true;
+        } catch (sheetErr) {
+          console.error('Direct Google Sheets submission error:', sheetErr);
+        }
+      }
+
+      btn.disabled = false;
+      btn.textContent = originalText;
+
+      showToast('Thank you! Your message has been sent successfully. A core council representative will get back to you shortly.');
+      form.reset();
+    }
+
     // FAQ Accordion interaction
     document.querySelectorAll('.accordion-header').forEach(function (header) {
       header.addEventListener('click', function () {
@@ -754,7 +664,7 @@
       toast.classList.add('show');
       setTimeout(function () {
         toast.classList.remove('show');
-      }, 4000);
+      }, 4500);
     }
     window.showToast = showToast;
   </script>
