@@ -537,6 +537,66 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }, true);
 
+  /* ==========================================================================
+     8. Interactive Committee Collage Grid (Click to Pop Out)
+     ========================================================================== */
+  const committeeCollage = document.getElementById('committeeCollage');
+  if (committeeCollage) {
+    const collageItems = committeeCollage.querySelectorAll('.collage-item');
+
+    collageItems.forEach(function (item) {
+      item.setAttribute('tabindex', '0');
+      item.setAttribute('role', 'button');
+      item.setAttribute('aria-pressed', 'false');
+
+      function togglePopOut(e) {
+        e.stopPropagation();
+        const isPopped = item.classList.contains('popped-out');
+
+        // Reset all items
+        collageItems.forEach(function (el) {
+          el.classList.remove('popped-out');
+          el.setAttribute('aria-pressed', 'false');
+        });
+
+        // Toggle clicked item
+        if (!isPopped) {
+          item.classList.add('popped-out');
+          item.setAttribute('aria-pressed', 'true');
+        }
+      }
+
+      item.addEventListener('click', togglePopOut);
+
+      item.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          togglePopOut(e);
+        }
+      });
+    });
+
+    // Dismiss when clicking anywhere outside the collage
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('#committeeCollage')) {
+        collageItems.forEach(function (el) {
+          el.classList.remove('popped-out');
+          el.setAttribute('aria-pressed', 'false');
+        });
+      }
+    });
+
+    // Dismiss on Escape key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        collageItems.forEach(function (el) {
+          el.classList.remove('popped-out');
+          el.setAttribute('aria-pressed', 'false');
+        });
+      }
+    });
+  }
+
   // Current year in footer
   const yearNode = document.getElementById('year');
   if (yearNode) {

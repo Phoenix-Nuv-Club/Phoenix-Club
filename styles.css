@@ -1737,6 +1737,112 @@ textarea.form-control {
   transform: scale(1.02);
 }
 
+/* ==========================================================================
+   Interactive Committee Collage Grid
+   ========================================================================== */
+.interactive-collage {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+  width: min(100%, 370px);
+  padding: 8px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface);
+  border: 1px solid rgba(249, 115, 22, 0.24);
+  box-shadow: var(--shadow-flame);
+  position: relative;
+  overflow: visible;
+  box-sizing: border-box;
+  transition: box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+[data-theme="dark"] .interactive-collage {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.collage-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.collage-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+[data-theme="dark"] .collage-item img {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Subtle Hover preview */
+.collage-item:hover {
+  z-index: 15;
+}
+
+.collage-item:hover img {
+  transform: scale(1.14) translateY(-3px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22), 0 0 0 2px var(--flame-400);
+}
+
+/* Active Popped-Out State (When clicked!) */
+.collage-item.popped-out {
+  z-index: 40 !important;
+}
+
+.collage-item.popped-out img {
+  transform: scale(1.36) translateY(-6px);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.38), 0 0 0 3px var(--flame-500), 0 0 18px rgba(249, 115, 22, 0.5);
+  border-color: var(--flame-500);
+}
+
+/* Tooltip Badge showing Name & Role on Hover / Click */
+.collage-tooltip {
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--ink-900);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  z-index: 50;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(249, 115, 22, 0.4);
+}
+
+/* Flip tooltip to top for the bottom row so it stays within frame */
+.collage-item:nth-child(n+9) .collage-tooltip {
+  bottom: auto;
+  top: -28px;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+.collage-item.popped-out .collage-tooltip,
+.collage-item:hover .collage-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
 .team-section {
   padding-top: 24px;
 }
