@@ -1704,6 +1704,39 @@ textarea.form-control {
   object-fit: contain;
 }
 
+.hero-team-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 360px);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-surface);
+  border: 1px solid rgba(249, 115, 22, 0.25);
+  box-shadow: var(--shadow-flame);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hero-team-panel:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.hero-team-panel img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  cursor: zoom-in;
+  transition: transform var(--transition-slow);
+}
+
+.hero-team-panel:hover img {
+  transform: scale(1.02);
+}
+
 .team-section {
   padding-top: 24px;
 }
