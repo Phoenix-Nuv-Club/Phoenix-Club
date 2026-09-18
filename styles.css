@@ -2268,11 +2268,12 @@ textarea.form-control {
   color: #94a3b8;
   font-size: 0.875rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
+  text-align: center;
+  width: 100%;
 }
+
 
 .footer-badge-naac {
   display: inline-flex;
