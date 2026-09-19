@@ -319,14 +319,14 @@
       color: var(--accent-text);
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      justify-content: center;
       margin-top: 4px;
-      transition: gap 0.25s ease, color 0.25s ease;
+      transition: color 0.25s ease, transform 0.25s ease;
     }
     .year-link-card:hover .btn-link,
     .year-link-card:focus-visible .btn-link {
-      gap: 10px;
       color: var(--flame-600);
+      transform: translateY(-2px);
     }
 
     [data-theme="dark"] .year-link-card {
@@ -671,17 +671,17 @@
           <a href="past-members.html?year=2024#council-2024" class="year-link-card" aria-label="View 2024 Growth Executive team">
             <span class="num">2024</span>
             <span class="tag">Growth Executive</span>
-            <span class="btn-link">View Team &rarr;</span>
+            <span class="btn-link">View Team</span>
           </a>
           <a href="past-members.html?year=2025#council-2025" class="year-link-card" aria-label="View 2025 Impact Leadership team">
             <span class="num">2025</span>
             <span class="tag">Impact Leadership</span>
-            <span class="btn-link">View Team &rarr;</span>
+            <span class="btn-link">View Team</span>
           </a>
           <a href="past-members.html?year=2026#council-2026" class="year-link-card" aria-label="View 2026 Current Legacy team">
             <span class="num">2026</span>
             <span class="tag">Current Legacy</span>
-            <span class="btn-link">View Team &rarr;</span>
+            <span class="btn-link">View Team</span>
           </a>
         </div>
       </div>

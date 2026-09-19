@@ -139,6 +139,14 @@ If you type a wrong filename or haven't added the photo yet:
 - `2025-media-head-dwija-patel.jpg` — Dwija Patel (Media Head 2025)
 - `2025-technical-head-tannushree-shah.jpg` — Tannushree Shah (Technical Head 2025)
 
+### 2024 Alumni Council Members (`images/team/`)
+- `2024-president-kavya-chauhan.jpg` — Kavya Chauhan (President 2024)
+- `2024-vice-president-bushra-malek.jpg` — Bushra Malek (Vice President 2024)
+- `2024-secretary-priyanka-jagwant.jpg` — Priyanka Jagwant (Secretary 2024)
+- `2024-treasurer-charvi-talati.jpg` — Charvi Talati (Treasurer 2024)
+- `2024-media-head-siddhi-parmar.jpg` — Siddhi Parmar (Media Head 2024)
+- `2024-technical-head-tirth-patel.jpg` — Tirth Patel (Technical Head 2024)
+
 ### Events & Campus Galleries (`images/events/`)
 - `investiture-ceremony.jpg` — Investiture Ceremony 2026
 - `wildlife-week.jpg` — Wildlife Week Celebration (HD)
