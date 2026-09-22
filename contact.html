@@ -35,7 +35,7 @@
       width: 48px;
       height: 48px;
       border-radius: var(--radius-lg);
-      background: rgba(249, 115, 22, 0.1);
+      background: var(--flame-tint-active);
       color: var(--accent-text);
       display: inline-flex;
       align-items: center;
@@ -69,6 +69,9 @@
       gap: 36px;
       padding: 36px 40px;
       border-radius: var(--radius-xl);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-md);
       margin-top: 32px;
       margin-bottom: 40px;
     }
@@ -147,7 +150,7 @@
     }
     .accordion-item.active {
       border-color: var(--flame-500);
-      box-shadow: 0 4px 16px rgba(249, 115, 22, 0.12);
+      box-shadow: 0 4px 16px var(--flame-tint-border);
     }
     .accordion-header {
       width: 100%;
