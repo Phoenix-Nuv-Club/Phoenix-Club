@@ -1,0 +1,17 @@
+#!/bin/sh
+# Pre-commit hook: Block commits containing .db, .sqlite, .sqlite3, or .env files
+
+FORBIDDEN_STAGED=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(db|sqlite|sqlite3)$|^\.env$')
+
+if [ -n "$FORBIDDEN_STAGED" ]; then
+    echo "====================================================================="
+    echo "COMMIT BLOCKED: Prohibited file(s) staged for commit:"
+    echo "$FORBIDDEN_STAGED"
+    echo ""
+    echo "Database files (*.db, *.sqlite) and secrets (.env) must NOT be committed."
+    echo "Run: git rm --cached <file> and add it to .gitignore."
+    echo "====================================================================="
+    exit 1
+fi
+
+exit 0

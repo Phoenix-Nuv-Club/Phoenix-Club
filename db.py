@@ -306,6 +306,71 @@ def seed_default_data():
             1,
             "2026-08-01",
             "2026-10-31"
+        ),
+        (
+            "EVT-SUMMIT-2026",
+            "Annual Science Summit & Hackathon 2026",
+            "Interdisciplinary Hackathon",
+            "Flagship annual interdisciplinary science summit, prototype demos, paper presentations, and hackathon.",
+            "2026-11-15",
+            "09:00 AM",
+            "Campus Grounds & Auditorium",
+            350,
+            1,
+            "2026-08-01",
+            "2026-11-14"
+        ),
+        (
+            "EVT-VOL-TECH-2026",
+            "Committee Volunteer: Technical Team",
+            "Coordinator Application",
+            "Student coordinator and volunteer application for the Technical Team (Lead: Aditya & Shreya).",
+            "2026-10-15",
+            "03:00 PM",
+            "Tech Coordination Desk",
+            50,
+            1,
+            "2026-08-01",
+            "2026-10-15"
+        ),
+        (
+            "EVT-VOL-OUTREACH-2026",
+            "Committee Volunteer: Outreach Team",
+            "Coordinator Application",
+            "Student coordinator and volunteer application for the Outreach Team (Lead: Palak & Afiya).",
+            "2026-10-15",
+            "03:00 PM",
+            "Outreach Coordination Desk",
+            50,
+            1,
+            "2026-08-01",
+            "2026-10-15"
+        ),
+        (
+            "EVT-VOL-DECOR-2026",
+            "Committee Volunteer: Decoration Team",
+            "Coordinator Application",
+            "Student coordinator and volunteer application for the Decoration Team (Lead: Radhika, Chandravali, Krishna, Vani).",
+            "2026-10-15",
+            "03:00 PM",
+            "Creative Studio",
+            50,
+            1,
+            "2026-08-01",
+            "2026-10-15"
+        ),
+        (
+            "EVT-VOL-MEDIA-2026",
+            "Committee Volunteer: Media Team",
+            "Coordinator Application",
+            "Student coordinator and volunteer application for the Media & Press Team (Lead: Drashti, Khadija, Pushti, Vidhi).",
+            "2026-10-15",
+            "03:00 PM",
+            "Media & Press Desk",
+            50,
+            1,
+            "2026-08-01",
+            "2026-10-15"
         )
     ]
 

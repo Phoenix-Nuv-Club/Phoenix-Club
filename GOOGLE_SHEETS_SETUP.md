@@ -23,13 +23,38 @@ This guide walks you through connecting your **Contact Us Form** and **Event Reg
  * Receives Contact Form inquiries & Registration submissions and appends rows automatically.
  */
 
-function doPost(e) {
-  try {
-    var lock = LockService.getScriptLock();
-    lock.waitLock(30000); // Prevent concurrent write collisions
+// If you created this script directly inside your Google Sheet (Extensions > Apps Script),
+// leave SPREADSHEET_ID empty. If created as a standalone script, paste your Sheet ID here:
+var SPREADSHEET_ID = "";
 
-    var data = JSON.parse(e.postData.contents);
+function doGet(e) {
+  return ContentService.createTextOutput(JSON.stringify({
+    status: 'online',
+    message: 'Phoenix Club Google Sheets Webhook is active and healthy.'
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+function doPost(e) {
+  var lock = LockService.getScriptLock();
+  try {
+    lock.waitLock(10000); // 10s timeout to prevent concurrency collisions
+
+    var data = {};
+    if (e.postData && e.postData.contents) {
+      data = JSON.parse(e.postData.contents);
+    } else if (e.parameter) {
+      data = e.parameter;
+    }
+
     var doc = SpreadsheetApp.getActiveSpreadsheet();
+    if (!doc && SPREADSHEET_ID) {
+      doc = SpreadsheetApp.openById(SPREADSHEET_ID);
+    }
+
+    if (!doc) {
+      throw new Error("Spreadsheet not found. Please bind this script to your Google Sheet via Extensions > Apps Script, or set SPREADSHEET_ID.");
+    }
+
     var formType = data.form_type || 'contact';
 
     if (formType === 'contact') {
@@ -101,7 +126,6 @@ function doPost(e) {
       ]);
     }
 
-    lock.releaseLock();
     return ContentService.createTextOutput(JSON.stringify({
       result: 'success',
       message: 'Form submission appended to Google Sheets successfully'
@@ -112,21 +136,34 @@ function doPost(e) {
       result: 'error',
       error: error.toString()
     })).setMimeType(ContentService.MimeType.JSON);
+  } finally {
+    try {
+      lock.releaseLock();
+    } catch (e) {}
   }
 }
 ```
 
 ---
 
-### Step 3: Deploy as a Web App
-1. Click the blue **Deploy** button (top-right) &rarr; Select **New deployment**.
-2. Click the gear icon (`⚙️`) next to *Select type* and choose **Web app**.
-3. Fill in the deployment details:
-   - **Description**: `Phoenix Club Web Form Webhook`
-   - **Execute as**: `Me (your Google email)`
-   - **Who has access**: `Anyone` *(Important: Select "Anyone" so the website can submit entries without requiring Google account authorization).*
-4. Click **Deploy** and grant permissions if prompted by Google.
-5. Copy the generated **Web App URL** (it looks like `https://script.google.com/macros/s/AKfycb.../exec`).
+### Step 3: Deploy as a Web App (Critical Settings)
+
+> [!IMPORTANT]
+> **To prevent the `"You do not have permission to access the requested document"` error:**
+> You must configure **Execute as: Me**! If it is set to "User accessing the web app", anonymous form submissions will be blocked by Google.
+
+1. In the Apps Script editor, click the blue **Deploy** button (top-right) &rarr; Select **Manage deployments**.
+2. Click the pencil (`✏️`) **Edit** icon next to your active deployment.
+3. Configure these exact settings:
+   - **Execute as**: **`Me (your Google email)`** &larr; *(CRITICAL)*
+   - **Who has access**: **`Anyone`** &larr; *(CRITICAL: allows web forms to submit entries without requiring students to log into Google)*
+   - **Version**: Select **`New version`** so your code updates take effect!
+4. Click **Deploy**.
+5. If Google prompts *"Authorization required"*:
+   - Click **Review permissions**.
+   - Select your Google account.
+   - Click **Advanced** &rarr; Click **Go to Phoenix Webhook (unsafe)** &rarr; Click **Allow**.
+6. Copy the generated **Web App URL** (ends in `/exec`).
 
 ---
 

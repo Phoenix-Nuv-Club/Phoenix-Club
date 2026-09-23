@@ -24,6 +24,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Verify No Prohibited Files (.db, .sqlite, .env)
+        run: |
+          echo "Scanning repository for prohibited database or secret files..."
+          FORBIDDEN_FILES=$(find . -type f \( -name "*.db" -o -name "*.sqlite" -o -name "*.sqlite3" -o -name ".env" \) ! -path "./.git/*")
+          if [ -n "$FORBIDDEN_FILES" ]; then
+            echo "::error::Prohibited files detected in repository: $FORBIDDEN_FILES"
+            echo "Database files (*.db, *.sqlite) and environment secrets (.env) must not be tracked or committed."
+            exit 1
+          fi
+          echo "Security scan clean. No prohibited files found."
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

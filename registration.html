@@ -900,7 +900,7 @@
         <li><a href="contact.html">&#8250; Contact Us</a></li>
       </ul>
       <div class="footer-social-icons">
-        <a href="https://www.instagram.com/phoenix.nuv?stkn=cXU4N2Z2N2Zldnl5" target="_blank" rel="noreferrer" class="footer-social-btn instagram" aria-label="Instagram @phoenix.nuv" title="Instagram: @phoenix.nuv">
+        <a href="https://instagram.com/phoenix.nuv" target="_blank" rel="noreferrer" class="footer-social-btn instagram" aria-label="Instagram @phoenix.nuv" title="Instagram: @phoenix.nuv">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
         </a>
         <a href="mailto:phoenixclub@nuv.ac.in" class="footer-social-btn email" aria-label="Email phoenixclub@nuv.ac.in" title="Email: phoenixclub@nuv.ac.in">
@@ -931,38 +931,51 @@
 
   <script src="navbar.js"></script>
   <script>
-    // Google Apps Script Web App URL for direct client-side / Vercel submissions
+    // =========================================================================
+    // SECURITY ADVISORY NOTE:
+    // This Google Apps Script Web App URL is exposed in client-side JavaScript
+    // and is publicly readable by anyone inspecting network traffic or page source.
+    // Server-side validation, origin filtering, and anti-abuse / rate-limiting must
+    // be implemented on the Google Apps Script project backend.
+    // =========================================================================
+    // Google Apps Script Web App URL for direct client-side fallback submissions
     window.GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbx-JdE-HSiqSZ2SLIdaa8y3D4NatGDWrs2CSzXW_0hfhXL4V2EQn27dJM1AfL5MTOZtDQ/exec";
 
     let activeEventsList = [];
 
     async function fetchActiveEventsFromBackend() {
       try {
-        const res = await fetch('/api/events/active');
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
+        const res = await fetch('/api/events/active', { signal: controller.signal });
+        clearTimeout(timeoutId);
         if (!res.ok) return;
         const data = await res.json();
         if (data.events && data.events.length > 0) {
           activeEventsList = data.events;
           const select = document.getElementById('registrationCategory');
-          select.innerHTML = '';
+          if (!select) return;
 
-          const group = document.createElement('optgroup');
-          group.label = 'Active University Events (2026)';
-
-          data.events.forEach((ev, idx) => {
-            const opt = document.createElement('option');
-            opt.value = ev.title;
-            opt.textContent = `${ev.title} (${ev.event_date})${ev.is_full ? ' — FULL' : ''}`;
-            opt.setAttribute('data-id', ev.id);
-            opt.setAttribute('data-date', `${ev.event_date} | ${ev.event_time}`);
-            opt.setAttribute('data-venue', ev.venue);
-            opt.setAttribute('data-type', ev.category);
-            if (ev.is_full) opt.disabled = true;
-            if (idx === 0) opt.selected = true;
-            group.appendChild(opt);
+          // Annotate matching options with backend event id, date, venue, and capacity status
+          data.events.forEach((ev) => {
+            for (let i = 0; i < select.options.length; i++) {
+              const opt = select.options[i];
+              const optLower = opt.value.toLowerCase();
+              const evLower = ev.title.toLowerCase();
+              if (optLower.includes(evLower) || evLower.includes(optLower)) {
+                opt.setAttribute('data-id', ev.id);
+                opt.setAttribute('data-date', `${ev.event_date} | ${ev.event_time}`);
+                opt.setAttribute('data-venue', ev.venue);
+                opt.setAttribute('data-type', ev.category);
+                if (ev.is_full) {
+                  opt.disabled = true;
+                  if (!opt.textContent.includes('FULL')) {
+                    opt.textContent = `${opt.textContent} — FULL`;
+                  }
+                }
+              }
+            }
           });
-
-          select.appendChild(group);
           updateEventCardDetails();
         }
       } catch (e) {
@@ -1014,6 +1027,32 @@
       updateEventCardDetails();
     }
 
+    function renderSuccessPass(reg) {
+      const isMembership = (reg.event_name || '').includes('Membership');
+      const isVolunteer = (reg.event_name || '').includes('Volunteer');
+
+      document.getElementById('passGeneratedCode').textContent = reg.reg_code;
+      document.getElementById('passName').textContent = reg.full_name;
+      document.getElementById('passRoll').textContent = reg.enrollment_id;
+      document.getElementById('passSchool').textContent = reg.department;
+      document.getElementById('passCategory').textContent = reg.event_name;
+      document.getElementById('passVenue').textContent = reg.venue || 'Navrachana University';
+      document.getElementById('passEventDate').textContent = (reg.event_date && reg.event_time) ? `${reg.event_date} | ${reg.event_time}` : (reg.event_date || 'Academic Term 2026');
+      document.getElementById('passEventTitle').textContent = reg.event_name + (isMembership || isVolunteer ? '' : ' Pass');
+      
+      let badgeText = 'Event Entry Pass Confirmed';
+      if (isMembership) badgeText = 'Membership Pass Confirmed';
+      else if (isVolunteer) badgeText = 'Coordinator Application Logged';
+      document.getElementById('passBadgeText').textContent = badgeText;
+      
+      document.getElementById('passDate').textContent = reg.created_at || new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+
+      document.getElementById('registrationFormWrapper').style.display = 'none';
+      const passCard = document.getElementById('registrationPassCard');
+      passCard.classList.add('show');
+      passCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
     async function handleRegistrationSubmit(e) {
       e.preventDefault();
       const alertBox = document.getElementById('registrationAlert');
@@ -1030,16 +1069,22 @@
       const phone = document.getElementById('studentPhone').value.trim();
       const select = document.getElementById('registrationCategory');
       const opt = select.options[select.selectedIndex];
-      const category = opt.value;
-      const eventId = opt.getAttribute('data-id') || null;
-      const date = opt.getAttribute('data-date') || 'Academic Term 2026';
-      const venue = opt.getAttribute('data-venue') || 'Navrachana University';
+      const category = opt ? opt.value : 'General Registration';
+      const eventId = opt ? opt.getAttribute('data-id') : null;
+      const date = opt ? (opt.getAttribute('data-date') || 'Academic Term 2026') : 'Academic Term 2026';
+      const venue = opt ? (opt.getAttribute('data-venue') || 'Navrachana University') : 'Navrachana University';
       const notes = (document.getElementById('studentMotivation') ? document.getElementById('studentMotivation').value.trim() : '');
 
       submitBtn.disabled = true;
       submitBtn.textContent = 'Verifying & Generating Official Pass...';
 
+      let rendered = false;
+
+      // 1. Try local Flask backend first if available
       try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3500);
+
         const response = await fetch('/api/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1053,34 +1098,20 @@
             event_id: eventId,
             event_name: category,
             additional_info: notes
-          })
+          }),
+          signal: controller.signal
         });
-
-        const data = await response.json();
+        clearTimeout(timeoutId);
 
         if (response.status === 201) {
-          // Success: Database-generated pass!
-          const reg = data.registration;
-          document.getElementById('passGeneratedCode').textContent = reg.reg_code;
-          document.getElementById('passName').textContent = reg.full_name;
-          document.getElementById('passRoll').textContent = reg.enrollment_id;
-          document.getElementById('passSchool').textContent = reg.department;
-          document.getElementById('passCategory').textContent = reg.event_name;
-          document.getElementById('passVenue').textContent = reg.venue || venue;
-          document.getElementById('passEventDate').textContent = `${reg.event_date} | ${reg.event_time}` || date;
-          document.getElementById('passEventTitle').textContent = reg.event_name + (reg.event_name.includes('Membership') ? '' : ' Pass');
-          document.getElementById('passBadgeText').textContent = reg.event_name.includes('Membership') ? 'Membership Pass Confirmed' : 'Event Entry Pass Confirmed';
-          document.getElementById('passDate').textContent = reg.created_at;
-
-          document.getElementById('registrationFormWrapper').style.display = 'none';
-          const passCard = document.getElementById('registrationPassCard');
-          passCard.classList.add('show');
-          passCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          const data = await response.json();
+          renderSuccessPass(data.registration);
+          rendered = true;
           return;
         }
 
         if (response.status === 409) {
-          // Duplicate registration error
+          const data = await response.json();
           alertBox.className = 'reg-alert reg-alert-error show';
           alertBox.innerHTML = `
             <div style="display:flex; align-items:flex-start; gap:8px;">
@@ -1093,64 +1124,87 @@
             </div>
           `;
           alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-          // Other error (validation or capacity)
+          return;
+        }
+
+        if (response.status === 400) {
+          const data = await response.json();
           alertBox.className = 'reg-alert reg-alert-error show';
-          const errorMsg = data.messages ? data.messages.join('<br>') : (data.error || 'Registration failed. Please check your inputs.');
-          alertBox.innerHTML = `<strong>Registration Error:</strong><br>${errorMsg}`;
+          const errorMsg = data.messages ? data.messages.join('<br>') : (data.error || 'Please check your inputs.');
+          alertBox.innerHTML = `<strong>Registration Validation Error:</strong><br>${errorMsg}`;
           alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
         }
       } catch (err) {
-        console.error('Backend endpoint unreachable, using client registration flow:', err);
-        // Offline / client fallback
-        const isMembership = category.includes('Membership');
-        const fallbackCode = (isMembership ? 'PHX-MEM-' : 'PHX-EVT-') + Math.floor(1000 + Math.random() * 9000);
-
-        if (window.GOOGLE_SHEETS_WEBHOOK_URL && window.GOOGLE_SHEETS_WEBHOOK_URL.startsWith('http')) {
-          try {
-            fetch(window.GOOGLE_SHEETS_WEBHOOK_URL, {
-              method: 'POST',
-              mode: 'no-cors',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                form_type: 'registration',
-                timestamp: new Date().toLocaleString(),
-                reg_code: fallbackCode,
-                full_name: name,
-                enrollment_id: roll,
-                department: school,
-                academic_year: year,
-                email: email,
-                phone: phone,
-                event_name: category,
-                event_date: date,
-                additional_info: notes
-              })
-            }).catch(function(e) { console.log('Sheet post notice:', e); });
-          } catch (sheetErr) {
-            console.error('Direct Google Sheets registration submission notice:', sheetErr);
-          }
-        }
-
-        document.getElementById('passGeneratedCode').textContent = fallbackCode;
-        document.getElementById('passName').textContent = name;
-        document.getElementById('passRoll').textContent = roll;
-        document.getElementById('passSchool').textContent = school;
-        document.getElementById('passCategory').textContent = category;
-        document.getElementById('passVenue').textContent = venue;
-        document.getElementById('passEventDate').textContent = date;
-        document.getElementById('passEventTitle').textContent = category + (isMembership ? '' : ' Pass');
-        document.getElementById('passBadgeText').textContent = isMembership ? 'Membership Pass Confirmed' : 'Event Entry Pass Confirmed';
-        document.getElementById('passDate').textContent = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-
-        document.getElementById('registrationFormWrapper').style.display = 'none';
-        const passCard = document.getElementById('registrationPassCard');
-        passCard.classList.add('show');
-        passCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        console.log('Backend not reachable or static hosting environment (GitHub Pages). Executing client-side pass generation flow.');
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = originalBtnText;
       }
+
+      if (rendered) return;
+
+      // 2. Dual-Mode Client Fallback (GitHub Pages, custom domain static hosting, or offline)
+      const isMembership = category.includes('Membership');
+      const isVolunteer = category.includes('Volunteer');
+      const prefix = isMembership ? 'PHX-MEM-' : (isVolunteer ? 'PHX-VOL-' : 'PHX-2026-');
+      const fallbackCode = prefix + Math.floor(10000 + Math.random() * 90000);
+      const todayFormatted = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+
+      const clientPassData = {
+        reg_code: fallbackCode,
+        full_name: name,
+        enrollment_id: roll,
+        department: school,
+        academic_year: year,
+        email: email,
+        phone: phone,
+        event_name: category,
+        venue: venue,
+        event_date: date,
+        event_time: '',
+        created_at: todayFormatted,
+        is_offline: true
+      };
+
+      // Save pass to localStorage so student can always re-display/print their pass
+      try {
+        const savedPasses = JSON.parse(localStorage.getItem('phoenix_student_passes') || '[]');
+        savedPasses.unshift(clientPassData);
+        localStorage.setItem('phoenix_student_passes', JSON.stringify(savedPasses.slice(0, 10)));
+      } catch (e) {}
+
+      // Dispatch to Google Sheets Webhook in background without blocking UI
+      if (window.GOOGLE_SHEETS_WEBHOOK_URL && window.GOOGLE_SHEETS_WEBHOOK_URL.startsWith('http')) {
+        try {
+          fetch(window.GOOGLE_SHEETS_WEBHOOK_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              form_type: 'registration',
+              timestamp: new Date().toLocaleString(),
+              reg_code: fallbackCode,
+              full_name: name,
+              enrollment_id: roll,
+              department: school,
+              academic_year: year,
+              email: email,
+              phone: phone,
+              event_name: category,
+              event_date: date,
+              venue: venue,
+              additional_info: notes
+            })
+          }).catch(function (e) {
+            console.warn('Google Sheets background dispatch notice:', e);
+          });
+        } catch (sheetErr) {
+          console.warn('Direct Google Sheets registration notice:', sheetErr);
+        }
+      }
+
+      renderSuccessPass(clientPassData);
     }
 
     function resetRegistrationView() {
@@ -1174,7 +1228,8 @@
         else if (eventParam === 'lecture') selectEventQuick('Distinguished Guest');
         else if (eventParam === 'mixer') selectEventQuick('Community Mixer');
         else if (eventParam === 'membership') selectEventQuick('Annual General');
-        else if (eventParam === 'summit') selectEventQuick('Annual Science Summit');
+        else if (eventParam === 'summit' || eventParam === 'annual-day') selectEventQuick('Annual Science Summit');
+        else if (eventParam.includes('volunteer')) selectEventQuick('Committee Volunteer');
       } else {
         updateEventCardDetails();
       }

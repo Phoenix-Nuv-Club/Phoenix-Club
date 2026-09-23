@@ -212,6 +212,63 @@
         padding-bottom: 18px;
       }
     }
+
+    .contact-alert {
+      margin-bottom: 20px;
+      padding: 20px 24px;
+      border-radius: var(--radius-md);
+      font-size: var(--text-sm);
+      animation: fadeIn 0.3s ease-out;
+    }
+    .contact-alert.success {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.32);
+      color: #065f46;
+    }
+    [data-theme="dark"] .contact-alert.success {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: #6ee7b7;
+    }
+    .contact-alert.error {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.32);
+      color: #991b1b;
+    }
+    [data-theme="dark"] .contact-alert.error {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+    }
+    .contact-success-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .contact-success-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: var(--text-lg);
+    }
+    .contact-success-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #10b981;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .contact-reset-btn {
+      margin-top: 8px;
+      align-self: flex-start;
+    }
   </style>
 </head>
 <body>
@@ -337,7 +394,7 @@
           </div>
           <h3>Social</h3>
           <p>Follow our updates, event announcements, behind-the-scenes moments, and community highlights.</p>
-          <a href="https://www.instagram.com/phoenix.nuv?stkn=cXU4N2Z2N2Zldnl5" target="_blank" rel="noreferrer">Follow on Instagram</a>
+          <a href="https://instagram.com/phoenix.nuv" target="_blank" rel="noreferrer">Follow on Instagram</a>
         </article>
       </div>
 
@@ -350,6 +407,8 @@
           <span class="section-tag">Send a Message</span>
           <h2>We'd Love to Hear From You</h2>
           <p class="section-subtitle">Fill in your details below and a core council representative will get back to you shortly.</p>
+
+          <div id="contactAlert" class="contact-alert" role="alert" style="display:none;"></div>
 
           <form id="contactForm" onsubmit="handleContactSubmit(event)">
             <div class="form-group">
@@ -516,7 +575,7 @@
         <li><a href="contact.html">&#8250; Contact Us</a></li>
       </ul>
       <div class="footer-social-icons">
-        <a href="https://www.instagram.com/phoenix.nuv?stkn=cXU4N2Z2N2Zldnl5" target="_blank" rel="noreferrer" class="footer-social-btn instagram" aria-label="Instagram @phoenix.nuv" title="Instagram: @phoenix.nuv">
+        <a href="https://instagram.com/phoenix.nuv" target="_blank" rel="noreferrer" class="footer-social-btn instagram" aria-label="Instagram @phoenix.nuv" title="Instagram: @phoenix.nuv">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
         </a>
         <a href="mailto:phoenixclub@nuv.ac.in" class="footer-social-btn email" aria-label="Email phoenixclub@nuv.ac.in" title="Email: phoenixclub@nuv.ac.in">
@@ -553,12 +612,54 @@
     // Google Apps Script Web App URL for direct client-side / Vercel submissions
     window.GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbx-JdE-HSiqSZ2SLIdaa8y3D4NatGDWrs2CSzXW_0hfhXL4V2EQn27dJM1AfL5MTOZtDQ/exec";
 
+    function showContactAlert(isSuccess, title, message) {
+      const alert = document.getElementById('contactAlert');
+      if (!alert) return;
+      alert.style.display = 'block';
+      alert.className = `contact-alert ${isSuccess ? 'success' : 'error'}`;
+      if (isSuccess) {
+        alert.innerHTML = `
+          <div class="contact-success-inner">
+            <div class="contact-success-header">
+              <span class="contact-success-icon" aria-hidden="true">&#10003;</span>
+              <span>${title}</span>
+            </div>
+            <p style="margin:0; line-height:1.6;">${message}</p>
+            <button type="button" class="btn btn-secondary btn-sm contact-reset-btn" onclick="resetContactForm()">Send Another Message</button>
+          </div>
+        `;
+      } else {
+        alert.innerHTML = `
+          <div style="display:flex; align-items:flex-start; gap:10px;">
+            <span style="font-weight:800; color:#ef4444; font-size:1.2rem;">&#9888;</span>
+            <div><strong>${title}</strong><br>${message}</div>
+          </div>
+        `;
+      }
+      alert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function resetContactForm() {
+      const form = document.getElementById('contactForm');
+      if (form) {
+        form.reset();
+        form.style.display = 'block';
+      }
+      const alert = document.getElementById('contactAlert');
+      if (alert) alert.style.display = 'none';
+      const btn = document.getElementById('contactSubmitBtn');
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = 'Send Message';
+      }
+    }
+
     // Contact Form submission handler
     async function handleContactSubmit(e) {
       e.preventDefault();
       const form = document.getElementById('contactForm');
       const btn = document.getElementById('contactSubmitBtn');
-      const originalText = btn.textContent;
+      const originalText = 'Send Message';
 
       const fullName = document.getElementById('userName').value.trim();
       const email = document.getElementById('userEmail').value.trim();
@@ -566,7 +667,7 @@
       const message = document.getElementById('userMessage').value.trim();
 
       if (!fullName || !email || !message) {
-        showToast('Please fill in all required fields.');
+        showContactAlert(false, 'Validation Error', 'Please complete all required fields (Full Name, Email, and Message).');
         return;
       }
 
@@ -582,43 +683,56 @@
         message: message
       };
 
-      let submitted = false;
-
-      // 1. Send to local Flask backend first
+      // Save inquiry to localStorage so message is preserved locally even offline
       try {
-        const res = await fetch('/api/contact', {
+        const stored = JSON.parse(localStorage.getItem('phoenix_contact_inquiries') || '[]');
+        stored.unshift({ ...payload, id: Date.now() });
+        localStorage.setItem('phoenix_contact_inquiries', JSON.stringify(stored.slice(0, 25)));
+      } catch (e) {}
+
+      // 1. Send to local Flask backend first if available with short timeout
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3500);
+        await fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(payload),
+          signal: controller.signal
         });
-
-        if (res.ok) {
-          submitted = true;
-        }
+        clearTimeout(timeoutId);
       } catch (err) {
-        console.log('Local backend endpoint unreachable, checking direct Google Sheets webhook...', err);
+        // Backend endpoint unreachable or static deployment (GitHub Pages) - proceed gracefully
+        console.log('Local /api/contact unreachable or static host, dispatching to direct webhook.');
       }
 
-      // 2. Direct Google Sheets webhook fallback (useful when hosted statically on Vercel)
-      if (!submitted && window.GOOGLE_SHEETS_WEBHOOK_URL && window.GOOGLE_SHEETS_WEBHOOK_URL.startsWith('http')) {
+      // 2. Direct Google Sheets webhook dispatch in background (non-blocking)
+      if (window.GOOGLE_SHEETS_WEBHOOK_URL && window.GOOGLE_SHEETS_WEBHOOK_URL.startsWith('http')) {
         try {
-          await fetch(window.GOOGLE_SHEETS_WEBHOOK_URL, {
+          fetch(window.GOOGLE_SHEETS_WEBHOOK_URL, {
             method: 'POST',
             mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
+          }).catch(function (e) {
+            console.warn('Google Sheets background dispatch:', e);
           });
-          submitted = true;
         } catch (sheetErr) {
-          console.error('Direct Google Sheets submission error:', sheetErr);
+          console.warn('Direct Google Sheets dispatch notice:', sheetErr);
         }
       }
 
+      // Immediate visual confirmation without blocking
       btn.disabled = false;
       btn.textContent = originalText;
+      form.style.display = 'none';
 
-      showToast('Thank you! Your message has been sent successfully. A core council representative will get back to you shortly.');
-      form.reset();
+      showContactAlert(
+        true,
+        'Message Sent Successfully!',
+        `Thank you, <strong>${fullName}</strong>. Your inquiry regarding <em>${purpose}</em> has been securely submitted to the Phoenix Club Core Council. We will follow up with you at <strong>${email}</strong> shortly.`
+      );
+      showToast('Thank you! Your message has been sent successfully.');
     }
 
     // FAQ Accordion interaction

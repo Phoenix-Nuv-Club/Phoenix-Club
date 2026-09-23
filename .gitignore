@@ -2,3 +2,9 @@
 __pycache__/
 *.py[cod]
 .venv/
+
+# Database files & SQLite instances
+*.db
+*.sqlite
+*.sqlite3
+instance/
