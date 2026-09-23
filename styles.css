@@ -1855,72 +1855,348 @@ textarea.form-control {
 }
 
 /* ==========================================================================
-   Home CTA Banner
+   Home Living Legacy & Connect Sections (Zero Dead Space Layout)
    ========================================================================== */
 
+/* --- Card 1: Alumni & History (Meet the People Behind Our Journey) --- */
 .home-cta-section {
   max-width: var(--container-max);
-  margin: 32px auto 0;
+  margin: 44px auto 32px;
   padding: 0 20px;
 }
 
 .home-cta-inner {
-  padding: 40px 32px;
+  padding: 44px 40px 38px;
   border-radius: var(--radius-xl);
-  background: linear-gradient(135deg, var(--bg-surface) 0%, var(--flame-50) 100%);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(245, 237, 255, 0.9) 100%);
   border: 1px solid var(--flame-tint-border);
   box-shadow: var(--shadow-md);
   text-align: center;
 }
 
-.home-cta-inner h3 {
-  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
-  line-height: 1.18;
-  color: var(--ink-900);
+.home-cta-inner .eyebrow {
+  margin-bottom: 8px;
+  display: inline-block;
 }
 
-.home-cta-inner p {
-  max-width: 760px;
-  margin: 14px auto 0;
+.home-cta-inner h2 {
+  font-size: clamp(2rem, 3.2vw, 2.5rem);
+  line-height: 1.18;
+  margin: 0 0 12px;
+}
+
+.home-cta-desc {
+  max-width: 720px;
+  margin: 0 auto 36px;
   font-size: 1rem;
-  line-height: 1.7;
+  line-height: 1.65;
   color: var(--ink-600);
 }
 
-.home-cta-inner .btn {
-  margin-top: 24px;
+/* 3-Era Grid (2024, 2025, 2026) */
+.legacy-timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+  text-align: left;
 }
 
-/* Contact Home Section */
+.legacy-step {
+  display: flex;
+  flex-direction: column;
+}
+
+.legacy-step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--flame-700);
+  background: var(--bg-surface);
+  border: 1.5px solid rgba(168, 85, 247, 0.35);
+  border-radius: var(--radius-full);
+  padding: 4px 16px;
+  box-shadow: 0 2px 8px rgba(126, 34, 206, 0.08);
+  margin-bottom: 12px;
+  align-self: flex-start;
+  transition: all var(--transition-fast);
+}
+
+.legacy-step-badge.active {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.15) 0%, rgba(217, 70, 239, 0.18) 100%);
+  border-color: var(--phoenix-fuchsia);
+  color: var(--flame-700);
+  box-shadow: 0 0 14px rgba(217, 70, 239, 0.3);
+}
+
+.legacy-step-body {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: var(--radius-lg);
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.legacy-step:hover .legacy-step-body {
+  transform: translateY(-4px);
+  border-color: rgba(168, 85, 247, 0.45);
+  box-shadow: 0 12px 24px -6px rgba(126, 34, 206, 0.14);
+}
+
+.legacy-step.active-era .legacy-step-body {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.96) 0%, rgba(245, 237, 255, 0.8) 100%);
+  border-color: rgba(168, 85, 247, 0.38);
+  box-shadow: 0 8px 24px -4px rgba(168, 85, 247, 0.12);
+}
+
+.legacy-era-tag {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--flame-700);
+  background: rgba(168, 85, 247, 0.1);
+  padding: 3px 9px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+  align-self: flex-start;
+}
+
+.legacy-era-tag.active {
+  color: #c026d3;
+  background: rgba(192, 38, 211, 0.14);
+}
+
+.legacy-step-body h4 {
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--ink-900);
+  margin: 0 0 8px;
+  line-height: 1.25;
+}
+
+.legacy-step-body p {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--ink-600);
+  margin: 0 0 18px;
+  flex-grow: 1;
+}
+
+.legacy-avatars {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(168, 85, 247, 0.12);
+}
+
+.avatars-micro-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--ink-500);
+}
+
+.avatar-stack {
+  display: flex;
+  align-items: center;
+}
+
+.avatar-item {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--bg-surface);
+  margin-left: -10px;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), z-index 0.25s ease, border-color 0.25s ease;
+  z-index: 1;
+}
+
+.avatar-item:first-child {
+  margin-left: 0;
+}
+
+.avatar-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.avatar-item:hover {
+  transform: translateY(-4px) scale(1.22);
+  z-index: 20;
+  border-color: var(--flame-500);
+  box-shadow: 0 6px 16px rgba(126, 34, 206, 0.35);
+}
+
+.avatar-item::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: #0f172a;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  z-index: 30;
+}
+
+.avatar-item:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.home-cta-action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* --- Card 2: Contact Banner (Balanced 2-Column Split — Zero Empty Space) --- */
 .contact-home-section {
   max-width: var(--container-max);
-  margin: 36px auto;
+  margin: 28px auto 56px;
   padding: 0 20px;
 }
 
 .contact-home-inner {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 24px;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 36px;
   align-items: center;
-  padding: 32px 36px;
+  padding: 38px 42px;
   border-radius: var(--radius-xl);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, var(--flame-50) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(245, 237, 255, 0.92) 100%);
   border: 1px solid var(--flame-tint-border);
   box-shadow: var(--shadow-md);
 }
 
-.contact-home-inner h2 {
-  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
-  line-height: 1.18;
+.contact-home-left .eyebrow {
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.contact-home-left h2 {
+  font-size: clamp(1.85rem, 2.6vw, 2.35rem);
+  line-height: 1.2;
+  margin: 0;
 }
 
 .contact-home-copy {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 14px;
+  gap: 18px;
 }
+
+.contact-home-copy p {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--ink-600);
+  margin: 0;
+}
+
+/* Sleek Glowing Contact Button (Proportioned to Spec) */
+.journey-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #9333ea 0%, #7e22ce 50%, #c026d3 100%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.4), 0 4px 14px rgba(126, 34, 206, 0.25);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background 0.25s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.journey-cta-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: linear-gradient(135deg, #a855f7 0%, #9333ea 50%, #d946ef 100%);
+  box-shadow: 0 0 28px rgba(168, 85, 247, 0.6), 0 6px 18px rgba(126, 34, 206, 0.35);
+}
+
+.cta-arrow {
+  font-size: 1.1rem;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.journey-cta-btn:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+/* Responsive Overrides */
+@media (max-width: 900px) {
+  .home-cta-inner {
+    padding: 36px 24px 32px;
+  }
+
+  .legacy-timeline-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .contact-home-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 32px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-cta-inner {
+    padding: 28px 18px 24px;
+  }
+
+  .legacy-step-body {
+    padding: 18px 16px;
+  }
+
+  .contact-home-inner {
+    padding: 26px 18px;
+  }
+
+  .journey-cta-btn {
+    width: 100%;
+  }
+
+  .home-cta-action .btn {
+    width: 100%;
+  }
+}
+
 
 /* ==========================================================================
    Team, Committee & Member Cards (Face visibility & alignment)
@@ -3113,9 +3389,61 @@ img[src*="technical-head-ravichandra-kumar"] {
 }
 
 [data-theme="dark"] .home-cta-inner {
-  background: radial-gradient(circle at 50% 0%, rgba(168, 85, 247, 0.16) 0%, transparent 70%),
-              linear-gradient(135deg, #111a2e 0%, #162032 100%);
-  border-color: rgba(168, 85, 247, 0.35);
+  background: radial-gradient(circle at 50% 0%, rgba(168, 85, 247, 0.12) 0%, transparent 60%),
+              linear-gradient(175deg, #111a2e 0%, #0d1525 100%);
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+[data-theme="dark"] .legacy-step-badge {
+  background: #141e33;
+  border-color: rgba(168, 85, 247, 0.4);
+  color: var(--flame-300);
+}
+
+[data-theme="dark"] .legacy-step-badge.active {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.25) 0%, rgba(217, 70, 239, 0.25) 100%);
+  border-color: var(--phoenix-fuchsia);
+  color: #f0abfc;
+  box-shadow: 0 0 16px rgba(217, 70, 239, 0.35);
+}
+
+[data-theme="dark"] .legacy-step-body {
+  background: rgba(18, 25, 44, 0.7);
+  border-color: rgba(168, 85, 247, 0.22);
+}
+
+[data-theme="dark"] .legacy-step:hover .legacy-step-body {
+  border-color: var(--flame-400);
+  box-shadow: 0 14px 32px -6px rgba(0, 0, 0, 0.6), 0 0 20px rgba(168, 85, 247, 0.2);
+}
+
+[data-theme="dark"] .legacy-step.active-era .legacy-step-body {
+  background: linear-gradient(160deg, rgba(24, 34, 60, 0.85) 0%, rgba(15, 23, 42, 0.7) 100%);
+  border-color: rgba(168, 85, 247, 0.45);
+}
+
+[data-theme="dark"] .legacy-era-tag {
+  background: rgba(168, 85, 247, 0.2);
+  color: var(--flame-300);
+}
+
+[data-theme="dark"] .legacy-era-tag.active {
+  background: rgba(192, 38, 211, 0.25);
+  color: #f0abfc;
+}
+
+[data-theme="dark"] .legacy-avatars {
+  border-top-color: rgba(168, 85, 247, 0.2);
+}
+
+[data-theme="dark"] .avatar-item {
+  border-color: #12192c;
+}
+
+[data-theme="dark"] .avatar-item::after {
+  background: #020617;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  color: #ffffff;
 }
 
 [data-theme="dark"] .thankyou-section {
