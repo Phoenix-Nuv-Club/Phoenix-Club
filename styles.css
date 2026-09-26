@@ -1159,15 +1159,15 @@ textarea.form-control {
 }
 
 .section-pad {
-  padding: 40px 0;
+  padding: 24px 0;
 }
 
 .section-pad-sm {
-  margin: 30px 0;
+  margin: 20px 0;
 }
 
 .section-mb-lg {
-  margin-bottom: 50px;
+  margin-bottom: 36px;
 }
 
 .grid-2-narrow,
@@ -1214,6 +1214,30 @@ textarea.form-control {
   gap: 5px;
 }
 
+.card-meta {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-actions-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.card-actions-row .btn {
+  flex: 1;
+  text-align: center;
+  justify-content: center;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+}
+
 /* Solid accent variant of the photo chip */
 .card-role-chip.chip-accent {
   background: var(--flame-600);
@@ -1256,6 +1280,7 @@ textarea.form-control {
 .pill-notice {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   padding: 6px 14px;
   border-radius: var(--radius-full);
   background: var(--bg-elevated);
@@ -1265,6 +1290,8 @@ textarea.form-control {
   font-weight: 700;
   color: var(--ink-700);
   margin-bottom: 16px;
+  max-width: 100%;
+  text-align: center;
 }
 
 /* ==========================================================================
@@ -2203,13 +2230,26 @@ textarea.form-control {
    ========================================================================== */
 
 .team-page {
-  padding: 20px 0 50px;
+  padding: 20px 0 8px;
 }
 
-/* One page-hero for every interior page. Contact and Registration previously
-   shipped their own near-identical copies; both now use this. */
 .page-hero {
-  padding: 32px 0 28px;
+  padding: 22px 0 10px;
+}
+
+.page-hero + section,
+.page-hero + .section-pad,
+.page-hero + .team-section,
+.page-hero + .dept-section,
+.page-hero + .contact-section,
+.page-hero + .registration-layout {
+  padding-top: 14px;
+  margin-top: 0;
+}
+
+.page-hero + .filter-tabs-bar {
+  margin-top: 14px;
+  margin-bottom: 22px;
 }
 
 .page-hero-inner {
@@ -2440,6 +2480,8 @@ textarea.form-control {
 
 .team-section {
   padding-top: 24px;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 .section-heading {
@@ -2465,6 +2507,37 @@ textarea.form-control {
   grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   gap: 24px;
   align-items: stretch;
+}
+
+/* Centered Highlights Grid (symmetrically centers remaining cards in final row) */
+.team-grid.highlights-grid-center {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+
+.team-grid.highlights-grid-center > .team-card {
+  width: calc((100% - 48px) / 3);
+  max-width: calc((100% - 48px) / 3);
+  flex: 0 0 calc((100% - 48px) / 3);
+  box-sizing: border-box;
+}
+
+@media (max-width: 1100px) {
+  .team-grid.highlights-grid-center > .team-card {
+    width: calc((100% - 24px) / 2);
+    max-width: calc((100% - 24px) / 2);
+    flex: 0 0 calc((100% - 24px) / 2);
+  }
+}
+
+@media (max-width: 680px) {
+  .team-grid.highlights-grid-center > .team-card {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
 }
 
 .team-card {
@@ -2705,12 +2778,7 @@ img[src*="technical-head-ravichandra-kumar"] {
 }
 
 .social-links {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding-top: 8px;
-  border-top: 1px solid var(--border-subtle);
-  margin-top: auto;
+  display: none !important;
 }
 
 .social-link {
@@ -2819,7 +2887,7 @@ img[src*="technical-head-ravichandra-kumar"] {
 
 .site-footer {
   position: relative;
-  margin-top: 56px;
+  margin-top: 24px;
   background: #0f172a;
   border-top: 1px solid #1e293b;
   padding: 44px 0 20px;
@@ -3720,12 +3788,34 @@ img[src*="technical-head-ravichandra-kumar"] {
 
 @media (max-width: 680px) {
   .brand-subtitle,
-  .logo-right {
-    display: none;
+  .logo-right,
+  .nuv-logo-wrap {
+    display: none !important;
+  }
+
+  .navbar {
+    padding: 0 12px;
+  }
+
+  .navbar-right {
+    gap: 8px;
+  }
+
+  .navbar-toggle {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    padding: 8px;
   }
 
   .navbar-brand .brand-title {
-    font-size: 1.05rem;
+    font-size: 1.02rem;
+  }
+
+  .pill-notice {
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    letter-spacing: -0.01em;
   }
 
   .hero-photo-wrap {
@@ -3759,9 +3849,112 @@ img[src*="technical-head-ravichandra-kumar"] {
     gap: 24px;
   }
 
+  .hero {
+    padding: 22px 0 16px;
+  }
+
+  .hero-inner {
+    padding: 0 14px;
+    gap: 20px;
+  }
+
+  .home-about-section {
+    padding: 0 14px;
+    margin: 18px auto 24px;
+  }
+
+  .home-about-inner {
+    padding: 24px 18px;
+    gap: 20px;
+  }
+
+  .page-hero {
+    padding: 14px 0 6px;
+  }
+
+  .page-hero-inner {
+    padding: 20px 16px;
+    gap: 16px;
+  }
+
+  .page-hero-copy h1 {
+    font-size: clamp(1.4rem, 5vw, 1.75rem);
+    margin-bottom: 8px;
+  }
+
+  .page-hero-copy p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .section-pad {
+    padding: 16px 0;
+  }
+
+  .section-gap {
+    margin-top: 20px;
+  }
+
+  .section-heading {
+    margin-bottom: 20px;
+  }
+
+  .section-heading h2 {
+    font-size: 1.5rem;
+  }
+
   .hero-stats-row {
-    grid-template-columns: 1fr;
-    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    padding: 10px 4px;
+    margin: 16px auto 0;
+    max-width: 100%;
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.06);
+    text-align: center;
+  }
+
+  [data-theme="dark"] .hero-stats-row {
+    background: rgba(26, 22, 37, 0.72);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .hero-stat-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+  }
+
+  .hero-stat-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 15%;
+    height: 70%;
+    width: 1px;
+    background: var(--border-subtle);
+  }
+
+  .stat-item-num {
+    font-size: clamp(1.15rem, 3.8vw, 1.35rem);
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .stat-item-label {
+    font-size: clamp(0.62rem, 2.2vw, 0.72rem);
+    font-weight: 600;
+    margin-top: 2px;
+    color: var(--ink-500);
+    white-space: nowrap;
+    letter-spacing: -0.01em;
   }
 
   .slide-content {
@@ -3801,6 +3994,13 @@ img[src*="technical-head-ravichandra-kumar"] {
     font-size: 0.9rem;
   }
 
+  .card-actions-row .btn {
+    width: auto;
+    flex: 1;
+    padding: 8px 10px;
+    font-size: 0.82rem;
+  }
+
   .hero-actions {
     flex-direction: column;
     width: 100%;
@@ -3811,6 +4011,6 @@ img[src*="technical-head-ravichandra-kumar"] {
   }
 
   .page-hero-inner {
-    padding: 24px 18px;
+    padding: 18px 14px;
   }
 }
