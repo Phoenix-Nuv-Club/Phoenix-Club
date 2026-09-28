@@ -28,7 +28,8 @@ from auth import login_required, role_required, get_current_admin, log_activity
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
-STATIC_DIR = BASE_DIR
+PARENT_DIR = os.path.dirname(BASE_DIR)
+STATIC_DIR = PARENT_DIR if os.path.exists(os.path.join(PARENT_DIR, "index.html")) else BASE_DIR
 
 app = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY") or secrets.token_hex(32)
