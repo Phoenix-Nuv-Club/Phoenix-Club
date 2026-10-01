@@ -824,16 +824,17 @@ p {
    ========================================================================== */
 .year-selector-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 260px));
+  grid-template-columns: repeat(4, 1fr);
   justify-content: center;
-  gap: 24px;
+  gap: 20px;
   margin: 36px auto 0;
-  max-width: 1160px;
+  max-width: 1200px;
   width: 100%;
 }
 
 .year-link-card {
-  padding: 32px 24px;
+  padding: 28px 16px;
+  min-width: 0;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -951,6 +952,20 @@ p {
 [data-theme="dark"] .year-link-card:hover .btn-link,
 [data-theme="dark"] .year-link-card:focus-visible .btn-link {
   color: var(--flame-400);
+}
+
+@media (max-width: 960px) {
+  .year-selector-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .year-selector-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
 }
 
 /* Sunken wells nested inside a card read one step down from their parent */
@@ -1920,11 +1935,11 @@ textarea.form-control {
   color: var(--ink-600);
 }
 
-/* 3-Era Grid (2024, 2025, 2026) */
+/* 4-Era Grid (2023, 2024, 2025, 2026) */
 .legacy-timeline-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
   margin-bottom: 32px;
   text-align: left;
 }
@@ -1963,7 +1978,7 @@ textarea.form-control {
   background: rgba(255, 255, 255, 0.82);
   border: 1px solid rgba(168, 85, 247, 0.2);
   border-radius: var(--radius-lg);
-  padding: 22px 20px;
+  padding: 20px 16px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -2023,32 +2038,35 @@ textarea.form-control {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 6px;
   padding-top: 14px;
   border-top: 1px solid rgba(168, 85, 247, 0.12);
 }
 
 .avatars-micro-label {
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.5px;
   color: var(--ink-500);
+  white-space: nowrap;
 }
 
 .avatar-stack {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .avatar-item {
   position: relative;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   border: 2px solid var(--bg-surface);
-  margin-left: -10px;
+  margin-left: -8px;
   cursor: pointer;
+  overflow: hidden;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), z-index 0.25s ease, border-color 0.25s ease;
   z-index: 1;
 }
@@ -2063,6 +2081,11 @@ textarea.form-control {
   object-fit: cover;
   border-radius: 50%;
   display: block;
+}
+
+.avatar-item img[src*="2023-"] {
+  object-position: center 46%;
+  transform: scale(1.65);
 }
 
 .avatar-item:hover {
@@ -2185,14 +2208,16 @@ textarea.form-control {
 }
 
 /* Responsive Overrides */
+@media (max-width: 1080px) {
+  .legacy-timeline-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+}
+
 @media (max-width: 900px) {
   .home-cta-inner {
     padding: 36px 24px 32px;
-  }
-
-  .legacy-timeline-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
   }
 
   .contact-home-inner {
@@ -2202,9 +2227,14 @@ textarea.form-control {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .home-cta-inner {
     padding: 28px 18px 24px;
+  }
+
+  .legacy-timeline-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .legacy-step-body {
