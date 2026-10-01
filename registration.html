@@ -7,6 +7,16 @@
   <link rel="apple-touch-icon" href="phoenix-club-logo.png" />
   <title>Student Registration — Phoenix Club | Navrachana University</title>
   <meta name="description" content="Register for Phoenix Club membership, flagship campus festivals, interactive science workshops, and student leadership recruitments at Navrachana University." />
+  <link rel="canonical" href="https://www.phoenixclubnuv.in/registration" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.phoenixclubnuv.in/registration" />
+  <meta property="og:title" content="Student Registration — Phoenix Club | Navrachana University" />
+  <meta property="og:description" content="Register for Phoenix Club membership, flagship campus festivals, interactive science workshops, and student leadership recruitments at Navrachana University." />
+  <meta property="og:image" content="https://www.phoenixclubnuv.in/phoenix-club-logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Student Registration — Phoenix Club | Navrachana University" />
+  <meta name="twitter:description" content="Register for Phoenix Club membership, flagship campus festivals, interactive science workshops, and student leadership recruitments at Navrachana University." />
+  <meta name="twitter:image" content="https://www.phoenixclubnuv.in/phoenix-club-logo.png" />
 
   <!-- Google Fonts: Manrope -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -69,83 +79,122 @@
       margin: 0;
     }
 
-    /* Digital Pass / Result Card */
-    .reg-pass-card {
+    /* Registration Confirmation Card (Replaces Pass Card) */
+    .reg-success-card {
       display: none;
-      border: 2px dashed var(--flame-500);
+      border: 1.5px solid rgba(16, 185, 129, 0.32);
       border-radius: var(--radius-xl);
-      background: linear-gradient(135deg, var(--bg-surface) 0%, var(--flame-50) 100%);
-      padding: 36px 30px;
+      background: linear-gradient(135deg, var(--bg-surface) 0%, rgba(16, 185, 129, 0.05) 100%);
+      padding: 38px 32px;
       text-align: center;
       box-shadow: var(--shadow-lg);
       animation: fadeIn 0.4s ease;
+      margin: 0 auto;
+      max-width: 660px;
     }
-    .reg-pass-card.show {
+    .reg-success-card.show {
       display: block;
     }
-    .pass-badge {
-      display: inline-block;
-      padding: 4px 16px;
+    .reg-success-icon {
+      width: 64px;
+      height: 64px;
       border-radius: var(--radius-full);
-      background: var(--emerald-600);
-      color: #ffffff;
-      font-size: var(--text-base);
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 16px;
+      background: rgba(16, 185, 129, 0.12);
+      color: #059669;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.18);
     }
-    .pass-title {
-      font-size: var(--text-display-md);
+    [data-theme="dark"] .reg-success-icon {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+    }
+    .reg-success-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 4vw, 1.85rem);
       font-weight: 800;
       color: var(--ink-900);
-      margin: 0 0 6px;
+      margin: 0 0 8px;
     }
-    .pass-code {
-      font-family: var(--font-mono);
-      font-size: var(--text-3xl);
-      font-weight: 800;
-      color: var(--accent-text);
-      letter-spacing: 0.1em;
-      margin-bottom: 24px;
-      display: block;
+    .reg-success-message {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #065f46;
+      background: rgba(16, 185, 129, 0.09);
+      border: 1px solid rgba(16, 185, 129, 0.28);
+      padding: 14px 20px;
+      border-radius: var(--radius-md);
+      margin: 16px auto 22px;
+      max-width: 560px;
+      line-height: 1.5;
     }
-    .pass-details-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      text-align: left;
+    [data-theme="dark"] .reg-success-message {
+      color: #a7f3d0;
+      background: rgba(16, 185, 129, 0.16);
+      border-color: rgba(16, 185, 129, 0.35);
+    }
+    .reg-redirect-indicator {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--emerald-600);
+      margin-top: 8px;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    [data-theme="dark"] .reg-redirect-indicator {
+      color: #6ee7b7;
+    }
+    .reg-summary-box {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 20px;
-      margin-bottom: 24px;
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      text-align: left;
+      margin-bottom: 22px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px 20px;
     }
-    .pass-detail-item span {
-      font-size: var(--text-base);
+    .reg-summary-item span {
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
       color: var(--ink-500);
       display: block;
-      margin-bottom: 2px;
+      margin-bottom: 3px;
     }
-    .pass-detail-item strong {
-      font-size: var(--text-md);
+    .reg-summary-item strong {
+      font-size: 0.94rem;
       color: var(--ink-900);
+      word-break: break-word;
     }
-    .pass-code-inline {
-      font-family: var(--font-mono);
-      color: var(--accent-text);
-    }
-    .text-verified {
-      color: var(--emerald-600);
-    }
-    .reg-note {
+    .reg-success-note {
+      font-size: 0.88rem;
+      color: var(--ink-600);
+      line-height: 1.55;
       margin-bottom: 24px;
     }
-    .pass-actions {
+    .reg-success-actions {
       display: flex;
       gap: 14px;
       justify-content: center;
       flex-wrap: wrap;
+    }
+    @media (max-width: 600px) {
+      .reg-summary-box {
+        grid-template-columns: 1fr;
+        padding: 16px;
+      }
+      .reg-success-card {
+        padding: 28px 18px;
+      }
     }
 
     /* Inline status message above the form */
@@ -406,9 +455,6 @@
       .reg-form-container {
         padding: 28px 20px;
       }
-      .pass-details-grid {
-        grid-template-columns: 1fr;
-      }
     }
     @media (max-width: 680px) {
       .reg-form-container {
@@ -427,196 +473,6 @@
       .form-grid-2 {
         grid-template-columns: 1fr;
         gap: 14px;
-      }
-    }
-    /* Pass Official Header */
-    .pass-official-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding-bottom: 18px;
-      margin-bottom: 18px;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .pass-logo-img {
-      width: 44px;
-      height: 44px;
-      object-fit: contain;
-    }
-    .pass-univ-logo-img {
-      height: 38px;
-      max-width: 140px;
-      object-fit: contain;
-    }
-    .pass-header-info {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .pass-header-title {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--ink-900);
-      letter-spacing: -0.01em;
-    }
-    .pass-header-sub {
-      font-size: 0.8rem;
-      color: var(--ink-500);
-      font-weight: 600;
-    }
-
-    /* Print Styles: ONLY the Pass Card gets printed */
-    @media print {
-      @page {
-        margin: 10mm 15mm;
-        size: A4 portrait;
-      }
-
-      html, body {
-        background: #ffffff !important;
-        color: #0f172a !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        width: 100% !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-
-      .reveal {
-        opacity: 1 !important;
-        transform: none !important;
-        visibility: visible !important;
-      }
-
-      /* Hide everything except the pass card */
-      .navbar,
-      .skip-link,
-      .page-hero,
-      .reg-perks,
-      #registrationFormWrapper,
-      .pass-actions,
-      .site-footer,
-      .theme-toggle-btn,
-      .theme-toggle,
-      #themeToggleBtn,
-      footer {
-        display: none !important;
-        visibility: hidden !important;
-      }
-
-      main#main,
-      main.team-page,
-      .container,
-      .reg-form-container {
-        display: block !important;
-        max-width: 100% !important;
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        border: none !important;
-        box-shadow: none !important;
-        background: transparent !important;
-      }
-
-      #registrationPassCard {
-        display: block !important;
-        visibility: visible !important;
-        position: relative !important;
-        width: 100% !important;
-        max-width: 680px !important;
-        margin: 20px auto 0 !important;
-        padding: 28px 32px !important;
-        border: 2px solid #7e22ce !important;
-        border-radius: 16px !important;
-        background: #ffffff !important;
-        box-shadow: none !important;
-        text-align: center !important;
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-
-      .pass-official-header {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        padding-bottom: 14px !important;
-        margin-bottom: 16px !important;
-        border-bottom: 1.5px solid #cbd5e1 !important;
-      }
-
-      .pass-badge {
-        display: inline-block !important;
-        padding: 4px 16px !important;
-        border-radius: 9999px !important;
-        background: #059669 !important;
-        color: #ffffff !important;
-        font-size: 10pt !important;
-        font-weight: 800 !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.08em !important;
-        margin-bottom: 10px !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-
-      .pass-title {
-        font-size: 18pt !important;
-        font-weight: 800 !important;
-        color: #0f172a !important;
-        margin: 0 0 6px !important;
-      }
-
-      .pass-code {
-        font-family: var(--font-mono) !important;
-        font-size: 15pt !important;
-        font-weight: 800 !important;
-        color: #7e22ce !important;
-        letter-spacing: 0.08em !important;
-        margin-bottom: 16px !important;
-        display: block !important;
-      }
-
-      .pass-details-grid {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 10px 18px !important;
-        text-align: left !important;
-        background: #f8fafc !important;
-        border: 1px solid #cbd5e1 !important;
-        border-radius: 10px !important;
-        padding: 16px 20px !important;
-        margin-bottom: 16px !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-
-      .pass-detail-item span {
-        font-size: 8.5pt !important;
-        color: #64748b !important;
-        margin-bottom: 2px !important;
-        display: block !important;
-      }
-
-      .pass-detail-item strong {
-        font-size: 10.5pt !important;
-        color: #0f172a !important;
-        display: block !important;
-      }
-
-      .text-verified {
-        color: #059669 !important;
-        font-weight: 700 !important;
-      }
-
-      .reg-note {
-        font-size: 8.5pt !important;
-        color: #64748b !important;
-        margin: 0 !important;
-        line-height: 1.4 !important;
       }
     }
   </style>
@@ -662,6 +518,7 @@
         <ul class="dropdown-menu">
           <li><a href="events.html">All Events</a></li>
           <li><a href="upcoming-events.html">Upcoming Events</a></li>
+          <li><a href="wildlife-week.html">Wildlife Week 2026</a></li>
         </ul>
       </li>
 
@@ -721,7 +578,7 @@
           <span class="reg-perk-icon" aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
           </span>
-          <h3>Priority Event Passes</h3>
+          <h3>Priority Event Access</h3>
           <p>Fast-track admission to all campus festivals, hackathons, science exhibitions, and guest workshops.</p>
         </div>
 
@@ -767,10 +624,13 @@
             <div class="wildlife-banner-content">
               <span class="wildlife-banner-badge">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
-                Special Feature Event
+                Special Feature Event • 5–8 Oct 2026
               </span>
               <h3 class="wildlife-banner-title">Wildlife Week Celebration 2026</h3>
-              <p class="wildlife-banner-desc">Dedicated registrations for our university-wide Wildlife Week are hosted on the official Navrachana University registration portal.</p>
+              <p class="wildlife-banner-desc">
+                Dedicated registrations for our university-wide Wildlife Week are hosted on the official Navrachana University registration portal.
+                <a href="wildlife-week.html" style="color:var(--emerald-600); font-weight:700; text-decoration:underline; display:block; margin-top:4px;">View 14 Competitions, Schedule &amp; Details &rarr;</a>
+              </p>
             </div>
             <a href="https://nuv.ac.in/nuv-regn/regn.php" target="_blank" rel="noopener noreferrer" class="btn-wildlife-special" aria-label="Registration for Wildlife Week on NUV portal (opens in new tab)">
               <span>Registration for Wildlife Week</span>
@@ -799,7 +659,6 @@
                 <optgroup label="Workshops, Guest Lectures &amp; Tech Sessions">
                   <option value="Science &amp; Innovation Hands-On Workshop" data-venue="Innovation Lab 2" data-type="Prototyping &amp; Lab Workshop">Science &amp; Innovation Hands-On Workshop</option>
                   <option value="Distinguished Guest Lecture: Modern Biotechnology" data-venue="Seminar Hall A" data-type="Academic Breakthrough Keynote">Distinguished Guest Lecture: Modern Biotechnology</option>
-                  <option value="Annual Science Summit &amp; Hackathon 2026" data-venue="Campus Grounds" data-type="Interdisciplinary Hackathon">Annual Science Summit &amp; Hackathon 2026</option>
                   <option value="Microbiology Day Celebration" data-venue="Life Sciences Lab" data-type="Bioscience &amp; Lab Exhibition">Microbiology Day Celebration</option>
                 </optgroup>
               </select>
@@ -830,7 +689,7 @@
                   University Enrollment / Roll No. <span class="req">*</span>
                 </label>
                 <input type="text" id="studentRoll" class="form-control" placeholder="e.g. 240101001" required />
-                <span class="field-hint">Used for event pass verification</span>
+                <span class="field-hint">Used for university enrollment verification</span>
               </div>
             </div>
 
@@ -903,62 +762,61 @@
           </form>
         </div>
 
-        <!-- Digital Pass Card (Shown upon successful submission) -->
-        <div id="registrationPassCard" class="reg-pass-card">
-          <div class="pass-official-header">
-            <img src="phoenix-club-logo.png" alt="Phoenix Club emblem" class="pass-logo-img" />
-            <div class="pass-header-info">
-              <span class="pass-header-title">Phoenix Club</span>
-              <span class="pass-header-sub">Navrachana University, Vadodara</span>
-            </div>
-            <img src="navrachana-university-logo.png" alt="Navrachana University logo" class="pass-univ-logo-img" />
+        <!-- Registration Confirmation Card (Replaces Pass Card) -->
+        <div id="registrationSuccessCard" class="reg-success-card">
+          <div class="reg-success-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
           </div>
-          <span class="pass-badge" id="passBadgeText">Event Entry Pass Confirmed</span>
-          <h3 class="pass-title" id="passEventTitle">Investiture Ceremony 2026 Pass</h3>
-          <span class="pass-code" id="passGeneratedCode">PHX-EVT-8492</span>
-
-          <div class="pass-details-grid">
-            <div class="pass-detail-item">
-              <span>Member / Attendee</span>
-              <strong id="passName">-</strong>
+          <h3 class="reg-success-title">Registration Submitted!</h3>
+          <div class="reg-success-message">
+            <div>Your query about registration is done. We will contact you soon!</div>
+            <div class="reg-redirect-indicator">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              Returning to All Events...
             </div>
-            <div class="pass-detail-item">
+          </div>
+
+          <div class="reg-summary-box">
+            <div class="reg-summary-item">
+              <span>Attendee Name</span>
+              <strong id="summaryName">-</strong>
+            </div>
+            <div class="reg-summary-item">
               <span>Enrollment ID</span>
-              <strong id="passRoll">-</strong>
+              <strong id="summaryRoll">-</strong>
             </div>
-            <div class="pass-detail-item">
-              <span>School / Faculty</span>
-              <strong id="passSchool">-</strong>
+            <div class="reg-summary-item">
+              <span>School / Department</span>
+              <strong id="summarySchool">-</strong>
             </div>
-            <div class="pass-detail-item">
+            <div class="reg-summary-item">
+              <span>Academic Year</span>
+              <strong id="summaryYear">-</strong>
+            </div>
+            <div class="reg-summary-item" style="grid-column: 1 / -1;">
               <span>Registered Event / Category</span>
-              <strong id="passCategory">-</strong>
+              <strong id="summaryEvent" style="color: var(--flame-600);">-</strong>
             </div>
-            <div class="pass-detail-item">
-              <span>Event Venue</span>
-              <strong id="passVenue">NUV Main Auditorium</strong>
+            <div class="reg-summary-item">
+              <span>Email Address</span>
+              <strong id="summaryEmail">-</strong>
             </div>
-            <div class="pass-detail-item">
-              <span>Event Schedule</span>
-              <strong id="passEventDate">Schedule TBA (Notified via Email)</strong>
-            </div>
-            <div class="pass-detail-item">
-              <span>Pass Status</span>
-              <strong class="text-verified">Verified &bull; Grade 'A' NAAC Accredited</strong>
-            </div>
-            <div class="pass-detail-item">
-              <span>Issued Date</span>
-              <strong id="passDate">14 Sep 2026</strong>
+            <div class="reg-summary-item">
+              <span>Contact Number</span>
+              <strong id="summaryPhone">-</strong>
             </div>
           </div>
 
-          <p class="text-muted reg-note">
-            Your registration has been logged with the council. Please take a screenshot or print this pass for fast-track entry at the event registration desk.
+          <p class="reg-success-note">
+            Your details have been successfully forwarded to our coordination team and logged into the event master sheet. We will reach out to you with further updates and orientation details shortly.
           </p>
 
-          <div class="pass-actions">
-            <button type="button" class="btn btn-primary" onclick="window.print()">Print / Save Pass</button>
-            <button type="button" class="btn btn-secondary" onclick="resetRegistrationView()">Register for Another Event</button>
+          <div class="reg-success-actions">
+            <button type="button" class="btn btn-primary" onclick="resetRegistrationView()">Register for Another Event</button>
+            <a href="events.html" class="btn btn-secondary">Go to All Events</a>
           </div>
         </div>
       </div>
@@ -1108,30 +966,32 @@
       updateEventCardDetails();
     }
 
-    function renderSuccessPass(reg) {
-      const isMembership = (reg.event_name || '').includes('Membership');
-      const isVolunteer = (reg.event_name || '').includes('Volunteer');
+    let redirectTimer = null;
 
-      document.getElementById('passGeneratedCode').textContent = reg.reg_code;
-      document.getElementById('passName').textContent = reg.full_name;
-      document.getElementById('passRoll').textContent = reg.enrollment_id;
-      document.getElementById('passSchool').textContent = reg.department;
-      document.getElementById('passCategory').textContent = reg.event_name;
-      document.getElementById('passVenue').textContent = reg.venue || 'Navrachana University';
-      document.getElementById('passEventDate').textContent = (reg.event_date && !reg.event_date.toLowerCase().includes('tba') && !reg.event_date.toLowerCase().includes('academic')) ? reg.event_date : 'Schedule TBA (Notified via Email)';
-      document.getElementById('passEventTitle').textContent = reg.event_name + (isMembership || isVolunteer ? '' : ' Pass');
-      
-      let badgeText = 'Event Entry Pass Confirmed';
-      if (isMembership) badgeText = 'Membership Pass Confirmed';
-      else if (isVolunteer) badgeText = 'Coordinator Application Logged';
-      document.getElementById('passBadgeText').textContent = badgeText;
-      
-      document.getElementById('passDate').textContent = reg.created_at || new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    function renderRegistrationSuccess(reg) {
+      document.getElementById('summaryName').textContent = reg.full_name || '-';
+      document.getElementById('summaryRoll').textContent = reg.enrollment_id || '-';
+      document.getElementById('summarySchool').textContent = reg.department || '-';
+      document.getElementById('summaryYear').textContent = reg.academic_year || '-';
+      document.getElementById('summaryEvent').textContent = reg.event_name || 'General Event Registration';
+      document.getElementById('summaryEmail').textContent = reg.email || '-';
+      document.getElementById('summaryPhone').textContent = reg.phone || '-';
 
       document.getElementById('registrationFormWrapper').style.display = 'none';
-      const passCard = document.getElementById('registrationPassCard');
-      passCard.classList.add('show');
-      passCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const successCard = document.getElementById('registrationSuccessCard');
+      successCard.classList.add('show');
+      successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      // Flash nice message as requested
+      if (typeof window.showToast === 'function') {
+        window.showToast('Your query about registration is done! Returning to All Events...', 3000);
+      }
+
+      // Automatically return to All Events section after 1.8 seconds (1-2s as requested)
+      if (redirectTimer) clearTimeout(redirectTimer);
+      redirectTimer = setTimeout(function () {
+        window.location.href = 'events.html';
+      }, 1800);
     }
 
     async function handleRegistrationSubmit(e) {
@@ -1157,11 +1017,25 @@
       const notes = (document.getElementById('studentEnquiry') ? document.getElementById('studentEnquiry').value.trim() : (document.getElementById('studentMotivation') ? document.getElementById('studentMotivation').value.trim() : ''));
 
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Registering & Generating Pass...';
+      submitBtn.textContent = 'Submitting Registration...';
 
-      let rendered = false;
+      const payload = {
+        form_type: 'registration',
+        timestamp: new Date().toLocaleString(),
+        full_name: name,
+        enrollment_id: roll,
+        department: school,
+        academic_year: year,
+        email: email,
+        phone: phone,
+        event_id: eventId,
+        event_name: category,
+        venue: venue,
+        event_date: date,
+        additional_info: notes
+      };
 
-      // 1. Try local Flask backend first if available
+      // 1. Try local Flask backend if available
       try {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 3500);
@@ -1169,27 +1043,10 @@
         const response = await fetch('/api/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            full_name: name,
-            enrollment_id: roll,
-            department: school,
-            academic_year: year,
-            email: email,
-            phone: phone,
-            event_id: eventId,
-            event_name: category,
-            additional_info: notes
-          }),
+          body: JSON.stringify(payload),
           signal: controller.signal
         });
         clearTimeout(timeoutId);
-
-        if (response.status === 201) {
-          const data = await response.json();
-          renderSuccessPass(data.registration);
-          rendered = true;
-          return;
-        }
 
         if (response.status === 409) {
           const data = await response.json();
@@ -1199,12 +1056,13 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0; margin-top:2px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
               <div>
                 <strong>Duplicate Registration Detected:</strong><br>
-                Student with Enrollment ID <strong>${roll}</strong> is already registered for this event.<br>
-                Existing Pass Code: <strong class="pass-code-inline">${data.reg_code || 'Recorded in database'}</strong>.
+                Student with Enrollment ID <strong>${roll}</strong> is already registered for this event.
               </div>
             </div>
           `;
           alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalBtnText;
           return;
         }
 
@@ -1214,85 +1072,50 @@
           const errorMsg = data.messages ? data.messages.join('<br>') : (data.error || 'Please check your inputs.');
           alertBox.innerHTML = `<strong>Registration Validation Error:</strong><br>${errorMsg}`;
           alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalBtnText;
           return;
         }
       } catch (err) {
-        console.log('Backend not reachable or static hosting environment (GitHub Pages). Executing client-side pass generation flow.');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalBtnText;
+        console.log('Local backend unreachable or static deployment (GitHub Pages). Forwarding to Google Sheets spreadsheet.');
       }
 
-      if (rendered) return;
-
-      // 2. Dual-Mode Client Fallback (GitHub Pages, custom domain static hosting, or offline)
-      const isMembership = category.includes('Membership');
-      const isVolunteer = category.includes('Volunteer');
-      const prefix = isMembership ? 'PHX-MEM-' : (isVolunteer ? 'PHX-VOL-' : 'PHX-2026-');
-      const fallbackCode = prefix + Math.floor(10000 + Math.random() * 90000);
-      const todayFormatted = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-
-      const clientPassData = {
-        reg_code: fallbackCode,
-        full_name: name,
-        enrollment_id: roll,
-        department: school,
-        academic_year: year,
-        email: email,
-        phone: phone,
-        event_name: category,
-        venue: venue,
-        event_date: date,
-        event_time: '',
-        created_at: todayFormatted,
-        is_offline: true
-      };
-
-      // Save pass to localStorage so student can always re-display/print their pass
-      try {
-        const savedPasses = JSON.parse(localStorage.getItem('phoenix_student_passes') || '[]');
-        savedPasses.unshift(clientPassData);
-        localStorage.setItem('phoenix_student_passes', JSON.stringify(savedPasses.slice(0, 10)));
-      } catch (e) {}
-
-      // Dispatch to Google Sheets Webhook in background without blocking UI
+      // 2. Dispatch to user's Google Sheet (live Excel spreadsheet)
       if (window.GOOGLE_SHEETS_WEBHOOK_URL && window.GOOGLE_SHEETS_WEBHOOK_URL.startsWith('http')) {
         try {
           fetch(window.GOOGLE_SHEETS_WEBHOOK_URL, {
             method: 'POST',
             mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              form_type: 'registration',
-              timestamp: new Date().toLocaleString(),
-              reg_code: fallbackCode,
-              full_name: name,
-              enrollment_id: roll,
-              department: school,
-              academic_year: year,
-              email: email,
-              phone: phone,
-              event_name: category,
-              event_date: date,
-              venue: venue,
-              additional_info: notes
-            })
+            body: JSON.stringify(payload)
           }).catch(function (e) {
             console.warn('Google Sheets background dispatch notice:', e);
           });
         } catch (sheetErr) {
-          console.warn('Direct Google Sheets registration notice:', sheetErr);
+          console.warn('Direct Google Sheets dispatch notice:', sheetErr);
         }
       }
 
-      renderSuccessPass(clientPassData);
+      // 3. Save to localStorage for local audit log
+      try {
+        const stored = JSON.parse(localStorage.getItem('phoenix_event_registrations') || '[]');
+        stored.unshift({ ...payload, id: Date.now() });
+        localStorage.setItem('phoenix_event_registrations', JSON.stringify(stored.slice(0, 50)));
+      } catch (e) {}
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalBtnText;
+
+      renderRegistrationSuccess(payload);
     }
 
     function resetRegistrationView() {
+      if (redirectTimer) clearTimeout(redirectTimer);
       document.getElementById('studentRegistrationForm').reset();
       document.getElementById('registrationAlert').classList.remove('show');
-      document.getElementById('registrationPassCard').classList.remove('show');
+      document.getElementById('registrationSuccessCard').classList.remove('show');
       document.getElementById('registrationFormWrapper').style.display = 'block';
+      document.getElementById('registrationFormWrapper').scrollIntoView({ behavior: 'smooth', block: 'start' });
       updateEventCardDetails();
     }
 
@@ -1308,7 +1131,6 @@
         else if (eventParam === 'workshop') selectEventQuick('Science & Innovation');
         else if (eventParam === 'lecture') selectEventQuick('Distinguished Guest');
         else if (eventParam === 'microbiology') selectEventQuick('Microbiology');
-        else if (eventParam === 'summit' || eventParam === 'annual-day') selectEventQuick('Annual Science Summit');
       } else {
         updateEventCardDetails();
       }
