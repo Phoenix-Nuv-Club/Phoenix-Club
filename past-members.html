@@ -125,6 +125,7 @@
       <button type="button" class="filter-pill" data-year="2026" id="filterPill2026">2026 Council</button>
       <button type="button" class="filter-pill" data-year="2025" id="filterPill2025">2025 Council</button>
       <button type="button" class="filter-pill" data-year="2024" id="filterPill2024">2024 Council</button>
+      <button type="button" class="filter-pill" data-year="2023" id="filterPill2023">2023 Council</button>
     </div>
 
     <!-- ==========================================================================
@@ -360,6 +361,114 @@
         </article>
       </div>
     </section>
+
+    <!-- ==========================================================================
+         Year 2023 Council (Founding Leadership)
+         ========================================================================== -->
+    <section class="team-section year-section section-gap" id="council-2023" data-year-section="2023">
+      <div class="year-header reveal">
+        <h3>Academic Year 2023</h3>
+        <span class="year-chip">Founding Council</span>
+      </div>
+
+      <div class="team-grid">
+        <!-- 1. President: Shalvi Shah -->
+        <article class="team-card reveal">
+          <div class="member-photo">
+            <img src="images/team/2023-president-shalvi-shah.jpg" alt="Shalvi Shah - President 2023" class="lightbox-trigger" />
+          </div>
+          <div class="member-copy">
+            <span class="role-badge">President</span>
+            <h3>Shalvi Shah</h3>
+            <p>Founding student president who spearheaded the establishment of Phoenix Club, formal council governance, and inaugural campus science initiatives.</p>
+          </div>
+        </article>
+
+        <!-- 2. Vice President: Aneri Shah -->
+        <article class="team-card reveal">
+          <div class="member-photo">
+            <img src="images/team/2023-vice-president-aneri-shah.jpg" alt="Aneri Shah - Vice President 2023" class="lightbox-trigger" />
+          </div>
+          <div class="member-copy">
+            <span class="role-badge">Vice President</span>
+            <h3>Aneri Shah</h3>
+            <p>Drove cross-department student integration, executive planning, and high-engagement collaborative initiatives across the School of Science.</p>
+          </div>
+        </article>
+
+        <!-- 3. General Secretary: Shrey Panchal -->
+        <article class="team-card reveal">
+          <div class="member-photo">
+            <img src="images/team/2023-general-secretary-shrey-panchal.jpg" alt="Shrey Panchal - General Secretary 2023" class="lightbox-trigger" />
+          </div>
+          <div class="member-copy">
+            <span class="role-badge">General Secretary</span>
+            <h3>Shrey Panchal</h3>
+            <p>Supervised foundational administration, official university communications, and day-to-day organizational coordination.</p>
+          </div>
+        </article>
+
+        <!-- 4. Joint Secretary: Shazia Pathan -->
+        <article class="team-card reveal">
+          <div class="member-photo">
+            <img src="images/team/2023-joint-secretary-shazia-pathan.jpg" alt="Shazia Pathan - Joint Secretary 2023" class="lightbox-trigger" />
+          </div>
+          <div class="member-copy">
+            <span class="role-badge">Joint Secretary</span>
+            <h3>Shazia Pathan</h3>
+            <p>Coordinated secretariat operations, student outreach correspondence, and structured council proceedings and meeting documentation.</p>
+          </div>
+        </article>
+
+        <!-- 5. Treasurer: Rajvi Jogani & Jaydeep Khimji -->
+        <article class="team-card reveal">
+          <div class="member-photo">
+            <img src="images/team/2023-treasurer-rajvi-jogani-jaydeep-khimji.jpg" alt="Rajvi Jogani and Jaydeep Khimji - Treasurer 2023" class="lightbox-trigger" />
+          </div>
+          <div class="member-copy">
+            <span class="role-badge">Treasurer</span>
+            <h3>Rajvi Jogani &amp; Jaydeep Khimji</h3>
+            <p>Managed financial planning, account ledgers, and resource allocations for inaugural campus events and club operations.</p>
+          </div>
+        </article>
+
+        <!-- 6. Outreach Head: Bhumika Parekh -->
+        <article class="team-card reveal">
+          <div class="member-photo">
+            <img src="images/team/2023-outreach-head-bhumika-parekh.jpg" alt="Bhumika Parekh - Outreach Head 2023" class="lightbox-trigger" />
+          </div>
+          <div class="member-copy">
+            <span class="role-badge">Outreach Head</span>
+            <h3>Bhumika Parekh</h3>
+            <p>Led student community outreach, public relations, and cross-departmental engagement to expand Phoenix Club's footprint.</p>
+          </div>
+        </article>
+
+        <!-- 7. Cultural Heads: Urvi Patel & Jenil Patel -->
+        <article class="team-card reveal">
+          <div class="member-photo">
+            <img src="images/team/2023-cultural-heads-urvi-patel-jenil-patel.jpg" alt="Urvi Patel and Jenil Patel - Cultural Heads 2023" class="lightbox-trigger" />
+          </div>
+          <div class="member-copy">
+            <span class="role-badge">Cultural Heads</span>
+            <h3>Urvi Patel &amp; Jenil Patel</h3>
+            <p>Orchestrated campus cultural activities, celebration performances, and creative student engagement showcases.</p>
+          </div>
+        </article>
+
+        <!-- 8. Technical Head: Nandita Phatak -->
+        <article class="team-card reveal">
+          <div class="member-photo">
+            <img src="images/team/2023-technical-head-nandita-phatak.jpg" alt="Nandita Phatak - Technical Head 2023" class="lightbox-trigger" />
+          </div>
+          <div class="member-copy">
+            <span class="role-badge">Technical Head</span>
+            <h3>Nandita Phatak</h3>
+            <p>Spearheaded technical setups, digital assets, audio/visual stage infrastructure, and event tech support.</p>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
 
   <!-- ==========================================================================
@@ -484,14 +593,14 @@
       var hashYear = window.location.hash.replace('#council-', '').replace('#year-', '').replace('#', '');
       var activeYear = queryYear || hashYear;
 
-      if (activeYear && ['2024', '2025', '2026', 'all'].indexOf(activeYear) !== -1) {
+      if (activeYear && ['2023', '2024', '2025', '2026', 'all'].indexOf(activeYear) !== -1) {
         applyYearFilter(activeYear, true);
       }
     })();
 
     window.addEventListener('hashchange', function () {
       var hashYear = window.location.hash.replace('#council-', '').replace('#year-', '').replace('#', '');
-      if (hashYear && ['2024', '2025', '2026', 'all'].indexOf(hashYear) !== -1) {
+      if (hashYear && ['2023', '2024', '2025', '2026', 'all'].indexOf(hashYear) !== -1) {
         applyYearFilter(hashYear, true);
       }
     });

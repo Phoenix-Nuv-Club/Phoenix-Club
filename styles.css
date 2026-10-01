@@ -824,11 +824,11 @@ p {
    ========================================================================== */
 .year-selector-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(220px, 280px));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 260px));
   justify-content: center;
   gap: 24px;
   margin: 36px auto 0;
-  max-width: 940px;
+  max-width: 1160px;
   width: 100%;
 }
 
@@ -2637,6 +2637,10 @@ textarea.form-control {
 #council-2026 .member-photo img,
 .dept-section[data-dept="heads"] .member-photo img {
   object-position: center 45%;
+}
+
+#council-2023 .member-photo img {
+  object-position: center center;
 }
 
 img[src*="president-tannushree-shah"] {
