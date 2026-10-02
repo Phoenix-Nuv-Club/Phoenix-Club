@@ -2633,6 +2633,10 @@ textarea.form-control {
   display: block;
 }
 
+.event-photo img[src*="icmtdt"] {
+  object-position: top center;
+}
+
 .team-card:hover .member-photo img,
 .team-card:hover .event-photo img,
 .team-card:hover .gallery-photo img,
