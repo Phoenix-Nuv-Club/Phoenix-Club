@@ -384,7 +384,7 @@ def seed_default_data():
 
     # 5. Default Settings
     settings_seed = [
-        ("club_name", "Phoenix Club — Navrachana University"),
+        ("club_name", "Phoenix Club - Navrachana University"),
         ("university_name", "Navrachana University, Vadodara"),
         ("contact_email", "phoenixclub@nuv.ac.in"),
         ("registrations_open", "true"),

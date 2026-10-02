@@ -1392,7 +1392,7 @@ def export_excel():
     # Title Banner
     ws.merge_cells("A1:K1")
     title_cell = ws["A1"]
-    title_cell.value = "Phoenix Club — Navrachana University | Official Registration Export"
+    title_cell.value = "Phoenix Club - Navrachana University | Official Registration Export"
     title_cell.font = Font(name="Calibri", size=14, bold=True, color="FFFFFF")
     title_cell.fill = PatternFill(start_color="1E293B", end_color="1E293B", fill_type="solid")
     title_cell.alignment = Alignment(horizontal="center", vertical="center")

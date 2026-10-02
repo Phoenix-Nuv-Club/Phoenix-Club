@@ -108,7 +108,7 @@ def render_unauthorized_page(admin):
     <html lang="en">
     <head>
       <meta charset="UTF-8">
-      <title>Access Denied — Phoenix Club</title>
+      <title>Access Denied - Phoenix Club</title>
       <link rel="stylesheet" href="/styles.css">
       <style>
         body {{ display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #0f172a; color: #fff; font-family: sans-serif; text-align: center; margin: 0; }}
@@ -119,7 +119,7 @@ def render_unauthorized_page(admin):
     <body>
       <div class="card">
         <h2 style="color: #ef4444; margin-top: 0;">&#9888; Permission Restricted</h2>
-        <p>Your current account (<strong>{admin['username']}</strong> — {admin['role']}) does not have permission to access this administrative feature.</p>
+        <p>Your current account (<strong>{admin['username']}</strong> - {admin['role']}) does not have permission to access this administrative feature.</p>
         <a href="/admin/dashboard" class="btn">Return to Dashboard</a>
       </div>
     </body>

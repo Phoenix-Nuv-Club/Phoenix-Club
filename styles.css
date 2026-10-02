@@ -3183,18 +3183,7 @@ img[src*="technical-head-ravichandra-kumar"] {
 }
 
 
-.footer-badge-naac {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 12px;
-  border-radius: var(--radius-full);
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  color: #34d399;
-  font-size: 0.78rem;
-  font-weight: 700;
-}
+
 
 /* ==========================================================================
    Theme Toggle Button (Light / Dark Mode Switcher)
