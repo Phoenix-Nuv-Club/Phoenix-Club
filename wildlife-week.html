@@ -250,7 +250,7 @@
       position: relative;
       width: 100%;
       max-width: 340px;
-      margin: 0 0 0 auto;
+      margin: 0 auto;
       border-radius: var(--radius-xl);
       overflow: hidden;
       background: var(--bg-surface);
@@ -480,28 +480,10 @@
     }
 
     .wild-reg-grid {
-      display: grid;
-      grid-template-columns: 1fr 280px;
-      gap: 36px;
-      align-items: center;
-    }
-
-    .wild-qr-card {
-      background: #ffffff;
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 16px;
-      text-align: center;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-    }
-
-    .wild-qr-card img {
-      width: 100%;
-      max-width: 220px;
-      height: auto;
-      margin: 0 auto 10px;
       display: block;
-      border-radius: var(--radius-sm);
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: left;
     }
 
     @media (max-width: 900px) {
@@ -523,21 +505,25 @@
         justify-content: center;
       }
       .wild-hero .hero-media {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         max-width: 440px;
         margin: 0 auto;
+      }
+      .wild-poster-card {
+        margin: 0 auto !important;
       }
       .wild-conservation-grid {
         grid-template-columns: 1fr;
         gap: 24px;
       }
       .wild-reg-grid {
-        grid-template-columns: 1fr;
         text-align: center;
       }
-      .wild-qr-card {
-        margin: 0 auto;
-        max-width: 260px;
+      .wild-reg-grid div > div[style*="display:flex"] {
+        justify-content: center !important;
       }
     }
 
@@ -574,6 +560,17 @@
       .wild-hero-features {
         justify-content: center;
         gap: 8px 14px;
+      }
+      .wild-hero .hero-media {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: 0 auto;
+      }
+      .wild-poster-card {
+        margin: 0 auto !important;
+        max-width: min(100%, 320px);
       }
       .hero-actions .btn {
         width: 100%;
@@ -1174,12 +1171,6 @@
           <div style="font-size:0.86rem; color:var(--ink-500); line-height:1.6;">
             <strong>Event Queries:</strong> Write to <a href="mailto:phoenixclub@nuv.ac.in" style="color:var(--wild-emerald); font-weight:700;">phoenixclub@nuv.ac.in</a> or visit the Phoenix Club booth at the Central Courtyard.
           </div>
-        </div>
-
-        <div class="wild-qr-card">
-          <img src="images/events/wildlife-registration-qr.png" alt="Scan to Register QR Code" />
-          <strong style="display:block; font-size:0.95rem; color:var(--ink-900); margin-bottom:4px;">Scan to Register</strong>
-          <span style="font-size:0.78rem; color:var(--ink-500); display:block;">Use your phone camera or QR scanner to open the NUV registration portal</span>
         </div>
       </div>
     </section>

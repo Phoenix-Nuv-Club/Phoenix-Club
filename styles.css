@@ -2395,6 +2395,7 @@ textarea.form-control {
   grid-template-columns: repeat(4, 1fr);
   gap: 7px;
   width: min(100%, 370px);
+  margin: 0 auto;
   padding: 8px;
   border-radius: var(--radius-lg);
   background: var(--bg-surface);
@@ -2404,6 +2405,29 @@ textarea.form-control {
   overflow: visible;
   box-sizing: border-box;
   transition: box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+@media (max-width: 680px) {
+  .interactive-collage {
+    width: min(100%, 320px);
+    gap: 5px;
+    padding: 6px;
+    margin: 0 auto;
+  }
+
+  .collage-tooltip {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .interactive-collage {
+    width: 100%;
+    max-width: 275px;
+    gap: 4px;
+    padding: 4px;
+  }
 }
 
 [data-theme="dark"] .interactive-collage {
@@ -2564,6 +2588,31 @@ textarea.form-control {
 
 @media (max-width: 680px) {
   .team-grid.highlights-grid-center > .team-card {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+}
+
+/* Annual Highlights 2x2 Balanced Grid (Past Events) */
+.team-grid.annual-highlights-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.team-grid.annual-highlights-grid > .team-card {
+  width: calc((100% - 28px) / 2);
+  max-width: 500px;
+  flex: 0 0 calc((100% - 28px) / 2);
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .team-grid.annual-highlights-grid > .team-card {
     width: 100%;
     max-width: 100%;
     flex: 0 0 100%;
