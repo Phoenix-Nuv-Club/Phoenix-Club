@@ -567,11 +567,11 @@ document.addEventListener('DOMContentLoaded', function () {
   }, true);
 
   /* ==========================================================================
-     8. Interactive Committee Collage Grid (Click to Pop Out)
+     8. Interactive Collage Grids (Click to Pop Out)
      ========================================================================== */
-  const committeeCollage = document.getElementById('committeeCollage');
-  if (committeeCollage) {
-    const collageItems = committeeCollage.querySelectorAll('.collage-item');
+  const interactiveCollages = document.querySelectorAll('.interactive-collage');
+  interactiveCollages.forEach(function (collage) {
+    const collageItems = collage.querySelectorAll('.collage-item');
 
     collageItems.forEach(function (item) {
       item.setAttribute('tabindex', '0');
@@ -582,7 +582,7 @@ document.addEventListener('DOMContentLoaded', function () {
         e.stopPropagation();
         const isPopped = item.classList.contains('popped-out');
 
-        // Reset all items
+        // Reset all items in this collage
         collageItems.forEach(function (el) {
           el.classList.remove('popped-out');
           el.setAttribute('aria-pressed', 'false');
@@ -605,9 +605,9 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
 
-    // Dismiss when clicking anywhere outside the collage
+    // Dismiss when clicking anywhere outside
     document.addEventListener('click', function (e) {
-      if (!e.target.closest('#committeeCollage')) {
+      if (!e.target.closest('.interactive-collage')) {
         collageItems.forEach(function (el) {
           el.classList.remove('popped-out');
           el.setAttribute('aria-pressed', 'false');
@@ -624,7 +624,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       }
     });
-  }
+  });
 
   // Current year in footer
   const yearNode = document.getElementById('year');
