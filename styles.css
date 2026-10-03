@@ -2435,6 +2435,27 @@ textarea.form-control {
   border-color: rgba(255, 255, 255, 0.12);
 }
 
+/* Annual Highlights 3x3 Event Collage (9 Authentic Event Photos) */
+#highlightsCollage {
+  grid-template-columns: repeat(3, 1fr);
+  width: min(100%, 330px);
+}
+
+@media (max-width: 680px) {
+  #highlightsCollage {
+    width: min(100%, 285px);
+    gap: 6px;
+  }
+}
+
+@media (max-width: 380px) {
+  #highlightsCollage {
+    width: 100%;
+    max-width: 245px;
+    gap: 4px;
+  }
+}
+
 .collage-item {
   position: relative;
   aspect-ratio: 1 / 1;
